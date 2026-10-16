@@ -6,6 +6,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { HeartPulse, Building2, Stethoscope, HandHeart, Play } from "lucide-react";
 import { degrau, escada, escreve, pulsa, ENTRADA, SUAVE } from "@/lib/motion";
 import { Titulo, Destaque } from "./comum";
+import { Cena } from "./Historia";
 import { PENSAMENTOS } from "@/conteudo/saude";
 import { EVENTO, PALESTRANTE } from "@/conteudo/palestrante";
 import type { Slide } from "@/conteudo/blocos";
@@ -148,7 +149,8 @@ export function Pensamentos({ slide }: { slide: Slide }) {
 /** A frase que fecha a conversa é riscada; a que abre espaço toma o lugar. */
 export function Reescrita({ slide }: { slide: Slide }) {
   return (
-    <div className="flex w-full flex-col gap-[4vmin]">
+    <div className="grid w-full grid-cols-[1fr_auto] items-center gap-[4vmin]">
+    <div className="flex min-w-0 flex-col gap-[4vmin]">
       <Titulo sobre={slide.sobre} />
       <div className="relative w-fit max-w-full">
         <motion.p className="text-palco-corpo font-bold leading-tight text-ink-2" initial={{ opacity: 1 }} animate={{ opacity: 0.4 }} transition={{ delay: 1.2, duration: 0.4 }}>
@@ -171,6 +173,8 @@ export function Reescrita({ slide }: { slide: Slide }) {
       >
         “{slide.boa}”
       </motion.p>
+    </div>
+    {slide.imagem && <Cena src={slide.imagem} alt={slide.alt} />}
     </div>
   );
 }

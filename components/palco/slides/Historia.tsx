@@ -1,9 +1,26 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { degrau, escada } from "@/lib/motion";
 import { PERSONAGENS, type IdPersonagem } from "@/conteudo/historia";
 import type { Slide } from "@/conteudo/blocos";
+
+
+/** Cena em quadrinho: ilustração gerada por IA, mesma moldura em todos os slides da história. */
+export function Cena({ src, alt }: { src: string; alt?: string }) {
+  return (
+    <motion.figure
+      initial={{ opacity: 0, scale: 0.95, rotate: -1.2 }}
+      animate={{ opacity: 1, scale: 1, rotate: 0 }}
+      transition={{ duration: 0.7, delay: 0.15 }}
+      className="relative shrink-0 self-center overflow-hidden rounded-[2.4vmin] border-[0.5vmin] border-ink shadow-xl"
+      style={{ aspectRatio: "1 / 1", width: "min(34vw, 58vh)" }}
+    >
+      <Image src={src} alt={alt ?? ""} fill sizes="34vw" className="object-cover" priority unoptimized />
+    </motion.figure>
+  );
+}
 
 const ETAPAS = [
   { id: "inicio", rotulo: "Início" },
@@ -38,8 +55,10 @@ export function Avatar({ quem, tamanho = "10vmin" }: { quem: IdPersonagem; taman
 export function Historia({ slide }: { slide: Slide }) {
   const h = slide.historia!;
   const atual = ETAPAS.findIndex((e) => e.id === h.capitulo);
+  const texto = slide.imagem ? "max-w-[44vw]" : "max-w-[82vw]";
   return (
-    <div className="flex w-full flex-col gap-[3vmin]">
+    <div className={`grid w-full items-center gap-[4vmin] ${slide.imagem ? "grid-cols-[1fr_auto]" : "grid-cols-1"}`}>
+    <div className="flex min-w-0 flex-col gap-[3vmin]">
       <motion.div initial="entra" animate="ativo" variants={degrau} className="flex flex-wrap items-center gap-x-[2.4vmin] gap-y-[1vmin]">
         <span className="dados text-palco-rodape font-bold uppercase tracking-[0.14em] text-muted">A história do Davi</span>
         <ol className="flex items-center gap-[1.2vmin]" aria-label="Etapa da história">
@@ -62,7 +81,7 @@ export function Historia({ slide }: { slide: Slide }) {
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-[82vw] text-[length:calc(clamp(32px,3.3vw,62px)*var(--escala-texto,1))] font-semibold leading-[1.18] text-ink"
+        className={`${texto} text-[length:calc(clamp(28px,2.9vw,56px)*var(--escala-texto,1))] font-semibold leading-[1.18] text-ink`}
       >
         {h.cena}
       </motion.p>
@@ -92,8 +111,10 @@ export function Historia({ slide }: { slide: Slide }) {
       )}
 
       {h.capitulo === "inicio" && slide.id === "1.5" && (
-        <p className="dados text-palco-rodape text-muted">Personagens fictícios, compostos de situações comuns.</p>
+        <p className="dados text-palco-rodape text-muted">Personagens fictícios, compostos de situações comuns. Ilustrações geradas por IA.</p>
       )}
+    </div>
+    {slide.imagem && <Cena src={slide.imagem} alt={slide.alt} />}
     </div>
   );
 }

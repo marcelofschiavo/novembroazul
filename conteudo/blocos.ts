@@ -62,6 +62,8 @@ export type Slide = {
   /** pergunta: a segunda pergunta aparece depois de um tempo. */
   segunda?: string;
   numeros?: { valor: string; rotulo: string; detalhe?: string }[];
+  imagem?: string;
+  alt?: string;
   historia?: { capitulo: "inicio" | "meio" | "fim"; quando: string; cena: string; falas?: Fala[]; desfecho?: string };
   colunas?: { titulo: string; itens: string[]; tom?: "neutro" | "aceso" }[];
   passos?: { titulo: string; texto?: string }[];
@@ -133,6 +135,8 @@ export const BLOCOS: Bloco[] = [
           cena: "Davi agenda a revisão de 40 mil km do carro pelo celular. Na mesma tela, aparece um lembrete de dois anos atrás: “consulta de rotina — remarcar?”. Ele arrasta pro lado.",
           falas: [{ quem: "davi", texto: "Depois eu vejo." }],
         },
+        imagem: "/historia/davi-1.jpg",
+        alt: "Ilustração: Davi no escritório, olhando o celular com um meio sorriso cansado, o polegar descartando uma notificação.",
         notaApresentador: "Personagens fictícios. Pergunte: 'alguém aqui conhece um Davi?' — risos costumam vir. Não precisa de resposta.",
       },
       {
@@ -144,6 +148,8 @@ export const BLOCOS: Bloco[] = [
           cena: "Roberto levanta duas vezes da mesa para ir ao banheiro. Faz meses que levanta também à noite.",
           falas: [{ quem: "roberto", texto: "Isso é da idade. Homem não fica correndo pra médico." }],
         },
+        imagem: "/historia/roberto-2.jpg",
+        alt: "Ilustração: Roberto levanta da mesa com a mão nas costas; Davi, sentado, olha para ele com preocupação.",
         notaApresentador: "Guarde o Roberto: ele volta nas luzes de alerta e no fim.",
       },
     ],
@@ -237,6 +243,8 @@ export const BLOCOS: Bloco[] = [
           ],
           desfecho: "E adia mais um pouco.",
         },
+        imagem: "/historia/lia-3.jpg",
+        alt: "Ilustração: Lia de braços cruzados, aflita, e Davi ao lado, cansado, de braços cruzados e olhar desviado.",
         notaApresentador: "Não julgue a Lia: ela está preocupada. Só registre que a cobrança fez o Davi se fechar. Vamos entender por quê no bloco 6.",
       },
       {
@@ -389,6 +397,8 @@ export const BLOCOS: Bloco[] = [
         sobre: "Lia, na semana seguinte",
         ruim: "Você PRECISA ir ao médico!",
         boa: "Tô te achando cansado. Quer que a gente veja isso junto?",
+        imagem: "/historia/lia-4.jpg",
+        alt: "Ilustração: Lia e Davi à mesa da cozinha com duas canecas; ela fala com calma e ele, aliviado, a escuta.",
         notaApresentador: "Davi respondeu: '...pode ser.' Mesma preocupação, outra porta. Pergunte: qual das duas você ouviria?",
       },
     ],
@@ -400,6 +410,19 @@ export const BLOCOS: Bloco[] = [
     curto: "Junto",
     duracaoMin: 4,
     slides: [
+      {
+        id: "7.0",
+        tipo: "historia",
+        historia: {
+          capitulo: "meio",
+          quando: "Domingo seguinte",
+          cena: "Davi mostra ao pai a tela de agendamento. Roberto torce o nariz — mas olha a tela.",
+          falas: [{ quem: "davi", texto: "Pai, deixa eu te mostrar uma coisa." }],
+        },
+        imagem: "/historia/davi-5.jpg",
+        alt: "Ilustração: Davi mostra a tela do celular ao pai, Roberto, que sorri meio a contragosto.",
+        notaApresentador: "Prepare o próximo slide: duas formas de terminar esse almoço.",
+      },
       {
         id: "7.1",
         tipo: "caminhos",
@@ -480,11 +503,13 @@ export const BLOCOS: Bloco[] = [
           quando: "Três meses depois",
           cena: "Os dois foram. Nenhum achou o que temia — e os dois acharam algo para cuidar.",
           falas: [
-            { quem: "roberto", texto: "Era a próstata aumentada, coisa benigna. E a pressão alta, que eu nem sabia." },
-            { quem: "davi", texto: "O ronco era apneia. A irritação, a cabeça. Tô tratando — e voltei pro futebol." },
+            { quem: "roberto", texto: "Próstata aumentada, benigna. E a pressão alta, que eu nem sabia." },
+            { quem: "davi", texto: "Era apneia. E a cabeça. Tô tratando." },
           ],
-          desfecho: "A revisão do carro continua em dia. A deles também: no mês do aniversário.",
+          desfecho: "A revisão deles agora também é anual.",
         },
+        imagem: "/historia/fim-6.jpg",
+        alt: "Ilustração: Davi e Roberto lado a lado numa sala de espera ensolarada, cada um com uma senha na mão, sorrindo de leve.",
         notaApresentador: "Final realista: a consulta encontra coisas — quase nunca a que se temia, e quase sempre algo tratável.",
       },
       {
