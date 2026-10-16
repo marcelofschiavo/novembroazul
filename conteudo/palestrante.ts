@@ -11,7 +11,7 @@ export const EVENTO = {
   dataExtenso: "novembro de 2026",
   /** Início da fala, para a contagem da tela de espera. null = sem cronômetro. */
   inicioFala: null as string | null,
-  url: "https://novembroazul.vercel.app",
+  url: "https://trilhanovembroazul.vercel.app",
 } as const;
 
 export const PALESTRANTE = {
@@ -29,7 +29,7 @@ export const PALESTRANTE = {
     "Atende em português, inglês, italiano e espanhol",
   ],
   bio:
-    "Marcelo Ferreira Schiavo é psicólogo clínico (CRP 06/109462), especialista em Terapia Cognitivo-Comportamental, MBA em Gestão de Pessoas e ator (DRT 40876/SP). Há 15 anos atua da clínica às empresas: atende em português, inglês, italiano e espanhol pela Mindheart Human Development e conduz palestras, treinamentos e programas de saúde e desenvolvimento para empresas — entre eles campanhas de Novembro Azul e Setembro Amarelo desde 2025. Foi professor universitário de Psicologia e voluntário do CVV. Também desenvolve as plataformas que usa nas palestras, como esta trilha.",
+    "Marcelo Ferreira Schiavo é psicólogo clínico (CRP 06/109462), especialista em Terapia Cognitivo-Comportamental, MBA em Gestão de Pessoas e ator (DRT 40876/SP). Há 15 anos atua da clínica às empresas: atende em português, inglês, italiano e espanhol pela Mindheart Human Development e conduz palestras, treinamentos e programas de saúde e desenvolvimento para empresas — com campanhas e programas de saúde em empresas desde 2021. Foi professor universitário de Psicologia e voluntário do CVV. Também desenvolve as plataformas que usa nas palestras, como esta trilha.",
   contatos: [
     { rede: "Instagram", rotulo: "@marceloschiavopsi", href: "https://www.instagram.com/marceloschiavopsi/" },
     { rede: "LinkedIn", rotulo: "in/marcelofschiavo", href: "https://www.linkedin.com/in/marcelofschiavo" },

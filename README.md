@@ -3,7 +3,7 @@
 Palestra e trilha sobre **saúde do homem, do check-up à conversa**, com Marcelo Schiavo (psicólogo,
 CRP 06/109462). Genérica: a mesma versão serve a qualquer empresa.
 
-Produção: `novembroazul.vercel.app` · repo `github.com/marcelofschiavo/novembroazul`
+Produção: `trilhanovembroazul.vercel.app` · repo `github.com/marcelofschiavo/novembroazul`
 
 ## O que tem
 

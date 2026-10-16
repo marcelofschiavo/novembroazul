@@ -12,7 +12,7 @@ Três peças que contam a mesma história e usam o mesmo conteúdo (mora num lug
 
 | Peça | Para quê | Onde |
 |---|---|---|
-| **Palco** | A palestra (40 min + 15 de perguntas) | `novembroazul.vercel.app/palco` |
+| **Palco** | A palestra (40 min + 15 de perguntas) | `trilhanovembroazul.vercel.app/palco` |
 | **Trilha** | Continuar depois: ferramentas, quiz, certificado | `/trilha` |
 | **Campanha** | E-mails semanais de novembro, mensagens curtas, cartaz | `/campanha/*` + textos para o RH copiar |
 
@@ -178,7 +178,7 @@ Sem nome nem logo de cliente — a mesma versão serve a todas as empresas. Só 
 | Fase | Entrega |
 |---|---|
 | 0 | Aprovação deste plano + respostas às pendências |
-| 1 | Base técnica, identidade, `CLAUDE.md`, primeiro deploy em `novembroazul.vercel.app` |
+| 1 | Base técnica, identidade, `CLAUDE.md`, primeiro deploy em `trilhanovembroazul.vercel.app` |
 | 2 | `referencias.ts` (DOIs no Crossref) + `blocos.ts` + `campanhas.ts` — **revisão de texto sua** |
 | 3 | Palco (radar, pictograma, reescrita, se-então) |
 | 4 | Ilustrações de Davi, Roberto e Lia |
