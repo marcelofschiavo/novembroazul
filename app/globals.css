@@ -1,0 +1,277 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Fontes carregadas via next/font/google em app/layout.tsx:
+   --font-outfit · --font-plex-mono (+ alternativas do palco)
+   ============================================================ */
+
+/*
+ * Identidade "Por inteiro · Novembro Azul". Genérica de propósito: serve a
+ * qualquer empresa, sem marca de cliente — só a Mindheart.
+ * Azul-marinho de base e o azul da campanha. Dois tokens de campanha:
+ * --campanha é para TEXTO (contraste >= 4,5:1 no fundo do tema);
+ * --campanha-fill é para preenchimento e traço (roda, barras, anéis) e
+ * nunca carrega texto por cima — use --acento para botão com texto.
+ * Luzes do painel: --ok / --atencao / --alerta, sempre com texto junto
+ * (cor nunca é o único sinal).
+ */
+
+/* ---------- TEMA LEITURA (trilha) ---------- */
+:root {
+  --bg:        #F5F7FB;
+  --surface:   #FFFFFF;
+  --surface-2: #EDF1F8;
+  --ink:       #0E1E36;
+  --ink-2:     #3A4A63;
+  --muted:     #56637A;
+  --line:      #DCE3EE;
+  --line-2:    #C3CEDF;
+  --acento:    #1F5BB0;
+  --acento-2:  #174A8F;
+  --acento-wash:#E5EEFA;
+  --alerta:    #A23B17;
+  --alerta-wash:#F6E4DA;
+  --atencao:   #8A5A00;
+  --atencao-wash:#FBEFD6;
+  --ok:        #2E6B2F;
+  --ok-wash:   #E3F1E1;
+  --focus:     #1F5BB0;
+  --sobre-acento:#FFFFFF;
+  --campanha:  #1F5BB0;
+  --campanha-fill:#3A7BD5;
+  --campanha-wash:#E5EEFA;
+  color-scheme: light;
+}
+
+/* ---------- TEMA PALCO ESCURO (tecla L) — azul-marinho ---------- */
+[data-tema="palco"] {
+  --bg:        #0B1B33;
+  --surface:   #12264A;
+  --surface-2: #183058;
+  --ink:       #F4F7FB;
+  --ink-2:     #C5D3E8;
+  --muted:     #9DB0CC;
+  --line:      #22406E;
+  --line-2:    #2C4F85;
+  --acento:    #7DB6FF;
+  --acento-2:  #A3CBFF;
+  --acento-wash:#132E55;
+  --alerta:    #F5A27C;
+  --alerta-wash:#3A2620;
+  --atencao:   #F2C46B;
+  --atencao-wash:#3A3018;
+  --ok:        #8FD48A;
+  --ok-wash:   #183A28;
+  --focus:     #7DB6FF;
+  --sobre-acento:#071A33;
+  --campanha:  #7DB6FF;
+  --campanha-fill:#3A7BD5;
+  --campanha-wash:#132E55;
+  color-scheme: dark;
+}
+
+/* ---------- TEMA PALCO CLARO (padrão) — projeção em sala iluminada ---------- */
+[data-tema="palco"][data-claro="on"] {
+  --bg:        #F4F7FB;
+  --surface:   #FFFFFF;
+  --surface-2: #E8EFF9;
+  --ink:       #0B1E3A;
+  --ink-2:     #2D4366;
+  --muted:     #4E5F7A;
+  --line:      #D3DDEC;
+  --line-2:    #B9C8DF;
+  --acento:    #1F5BB0;
+  --acento-2:  #174A8F;
+  --acento-wash:#E2ECF9;
+  --alerta:    #A23B17;
+  --alerta-wash:#F6E4DA;
+  --atencao:   #8A5A00;
+  --atencao-wash:#FBEFD6;
+  --ok:        #2E6B2F;
+  --ok-wash:   #E3F1E1;
+  --focus:     #1F5BB0;
+  --sobre-acento:#FFFFFF;
+  --campanha:  #1F5BB0;
+  --campanha-fill:#3A7BD5;
+  --campanha-wash:#E2ECF9;
+  color-scheme: light;
+}
+
+/* ---------- CORES DE DESTAQUE (configurações do palco) ----------
+   O azul da campanha é o padrão (sem atributo). Acento >= 4,8:1 sobre os
+   fundos; o contraste máximo ignora a paleta. */
+[data-tema="palco"][data-paleta="verde"] {
+  --acento:#8FD48A; --acento-2:#8FD48A; --acento-wash:#183A28; --focus:#8FD48A; --sobre-acento:#082210;
+}
+[data-tema="palco"][data-paleta="laranja"] {
+  --acento:#FFA84D; --acento-2:#FFA84D; --acento-wash:#3A2A14; --focus:#FFA84D; --sobre-acento:#2B1600;
+}
+[data-tema="palco"][data-paleta="roxo"] {
+  --acento:#C3A0F3; --acento-2:#C3A0F3; --acento-wash:#2C2145; --focus:#C3A0F3; --sobre-acento:#1D0F36;
+}
+[data-tema="palco"][data-claro="on"][data-paleta="verde"] {
+  --acento:#2E6B2F; --acento-2:#245425; --acento-wash:#E3F1E1; --focus:#2E6B2F; --sobre-acento:#FFFFFF;
+}
+[data-tema="palco"][data-claro="on"][data-paleta="laranja"] {
+  --acento:#A34A00; --acento-2:#7F3900; --acento-wash:#FBE9D6; --focus:#A34A00; --sobre-acento:#FFFFFF;
+}
+[data-tema="palco"][data-claro="on"][data-paleta="roxo"] {
+  --acento:#6A3E9E; --acento-2:#532F80; --acento-wash:#EDE3F7; --focus:#6A3E9E; --sobre-acento:#FFFFFF;
+}
+
+/* ---------- CONTRASTE MÁXIMO (tecla C) ---------- */
+[data-tema="palco"][data-contraste="max"] {
+  --bg:        #000000;
+  --surface:   #000000;
+  --surface-2: #000000;
+  --ink:       #FFFFFF;
+  --ink-2:     #FFFFFF;
+  --muted:     #8FD0FF;
+  --line:      #8FD0FF;
+  --line-2:    #8FD0FF;
+  --acento:    #8FD0FF;
+  --acento-2:  #8FD0FF;
+  --acento-wash:#000000;
+  --alerta:    #FFB020;
+  --alerta-wash:#000000;
+  --atencao:   #FFE100;
+  --atencao-wash:#000000;
+  --ok:        #7CFF3B;
+  --ok-wash:   #000000;
+  --sobre-acento:#000000;
+  --campanha:  #8FD0FF;
+  --campanha-fill:#8FD0FF;
+  --campanha-wash:#000000;
+  color-scheme: dark;
+}
+
+/*
+ * @theme (não "inline"): precisa emitir variáveis reais em :root para o
+ * CSS puro e qualquer var() direto conseguirem ler --text-palco-* e
+ * --color-*.
+ */
+@theme {
+  --color-bg:          var(--bg);
+  --color-surface:     var(--surface);
+  --color-surface-2:   var(--surface-2);
+  --color-ink:         var(--ink);
+  --color-ink-2:       var(--ink-2);
+  --color-muted:       var(--muted);
+  --color-line:        var(--line);
+  --color-line-2:      var(--line-2);
+  --color-acento:      var(--acento);
+  --color-acento-2:    var(--acento-2);
+  --color-acento-wash: var(--acento-wash);
+  --color-alerta:      var(--alerta);
+  --color-alerta-wash: var(--alerta-wash);
+  --color-atencao:     var(--atencao);
+  --color-atencao-wash:var(--atencao-wash);
+  --color-ok:          var(--ok);
+  --color-ok-wash:     var(--ok-wash);
+  --color-campanha:      var(--campanha);
+  --color-campanha-fill: var(--campanha-fill);
+  --color-campanha-wash: var(--campanha-wash);
+  --color-sobre-acento: var(--sobre-acento);
+
+  --font-corpo:  var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-titulo: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-dados:  var(--font-plex-mono), ui-monospace, monospace;
+
+  --text-palco-mega:   calc(clamp(56px, 7.1vw, 170px) * var(--escala-texto, 1));
+  --text-palco-titulo: calc(clamp(40px, 4.8vw, 120px) * var(--escala-texto, 1));
+  --text-palco-corpo:  calc(clamp(34px, 3vw, 60px) * var(--escala-texto, 1));
+  --text-palco-texto:  calc(clamp(28px, 2.4vw, 48px) * var(--escala-texto, 1));
+  --text-palco-nota:   calc(clamp(26px, 1.95vw, 40px) * var(--escala-texto, 1));
+  --text-palco-rodape: calc(clamp(17px, 1.2vw, 23px) * var(--escala-texto, 1));
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-corpo);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+[data-tema="palco"] body {
+  overflow: hidden;
+  user-select: none;
+}
+
+.palco-grade {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100dvh;
+  padding: 8vmin 5vmin 2.4vmin;
+  gap: 0;
+}
+/* "safe center": quando o conteúdo é mais alto que a área, alinha pelo topo
+   em vez de cortar o título pra fora da tela. */
+.palco-conteudo { min-height: 0; display: flex; flex-direction: column; justify-content: safe center; }
+.palco-rodape {
+  align-self: end;
+  padding-top: 1.6vmin;
+  font-family: var(--font-dados);
+  font-size: var(--text-palco-rodape);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex; justify-content: space-between; align-items: center; gap: 2rem;
+}
+
+h1, h2, h3 { text-wrap: balance; }
+@layer base { h1, h2, h3 { margin: 0; } }
+
+/* O preflight do Tailwind zera o cursor de <button>; sem isto nenhum botão mostra a mãozinha. */
+button:not(:disabled) { cursor: pointer; }
+
+/* Título: Outfit firme, sem itálico — a mesma letra da proposta e do material impresso. */
+.titulo { font-family: var(--font-titulo); font-weight: 700; line-height: 1.02; letter-spacing: -0.015em; }
+.dados  { font-family: var(--font-dados); font-variant-numeric: tabular-nums; }
+
+/* Troca de logo por tema do palco — ver components/ui/Logo.tsx. */
+.logo-clara { display: none; }
+.logo-escura { display: block; }
+[data-claro="on"] .logo-clara { display: block; }
+[data-claro="on"] .logo-escura { display: none; }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+
+[data-blackout="on"] .palco-grade { opacity: 0; transition: opacity 180ms linear; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 99px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* Quebra de linha equilibrada no palco: evita palavra solta na última linha. */
+.palco-grade :is(h1, h2, h3, p, li) {
+  text-wrap: balance;
+}
+
+/* Fontes alternativas escolhidas nas configurações do palco. */
+[data-fonte="acolhedora"] { --font-corpo: var(--font-nunito), ui-sans-serif, system-ui, sans-serif; --font-titulo: var(--font-nunito), ui-sans-serif, system-ui, sans-serif; }
+[data-fonte="classica"] { --font-corpo: var(--font-lora), Georgia, serif; --font-titulo: var(--font-playfair), Georgia, serif; }
+[data-fonte="legivel"] { --font-corpo: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif; --font-titulo: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif; }
+
+/* Campos da trilha: um padrão só. */
+.campo {
+  width: 100%;
+  border-radius: 0.6rem;
+  border: 1.5px solid var(--line-2);
+  background: var(--surface);
+  padding: 0.75rem 1rem;
+  color: var(--ink);
+  outline: none;
+}
+.campo:focus { border-color: var(--acento); }
