@@ -46,11 +46,11 @@ export function CartaMito({ mito, revelado }: { mito: Mito; revelado: boolean })
       )}
       <div className="w-full" style={{ perspective: 1400 }}>
         <motion.div className="grid w-full" style={{ transformStyle: "preserve-3d" }} initial="entra" animate={revelado ? "ativo" : "entra"} variants={viraCarta}>
-          <div className="flex items-center justify-center rounded-[3vmin] border-2 border-line-2 bg-surface-2 p-[4vmin]" style={{ gridArea: "1 / 1", backfaceVisibility: "hidden", minHeight: "44vh" }}>
+          <div className="cartao flex items-center justify-center p-[4vmin]" style={{ gridArea: "1 / 1", backfaceVisibility: "hidden", minHeight: "44vh" }}>
             <p className="titulo text-center text-palco-titulo text-ink">“{mito.afirmacao}”</p>
           </div>
           <div
-            className="flex flex-col items-center justify-center gap-[2vmin] rounded-[3vmin] border-[3px] border-campanha-fill bg-campanha-wash p-[3.4vmin] text-center"
+            className="flex flex-col items-center justify-center gap-[2vmin] rounded-[3vmin] cartao-aceso p-[3.4vmin] text-center"
             style={{ gridArea: "1 / 1", backfaceVisibility: "hidden", transform: "rotateY(180deg)", minHeight: "44vh" }}
           >
             <span className={`dados rounded-full px-[2.4vmin] py-[0.6vmin] text-palco-corpo font-black uppercase tracking-[0.14em] ${ehMito ? "bg-alerta text-bg" : "bg-ok text-bg"}`}>

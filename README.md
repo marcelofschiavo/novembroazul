@@ -7,7 +7,7 @@ Produção: `trilhanovembroazul.vercel.app` · repo `github.com/marcelofschiavo/
 
 ## O que tem
 
-- **`/palco`** — a apresentação (43 slides, ~45 min + perguntas). Presencial ou on-line, teclado ou
+- **`/palco`** — a apresentação (44 slides, ~45 min + perguntas). Presencial ou on-line, teclado ou
   passador, funciona offline depois de aberta uma vez. `?s=4.3` abre direto num slide.
 - **`/palco/aguardando`** — tela de espera enquanto a turma chega.
 - **`/trilha`** — 7 passos essenciais (Roda da Saúde, Meus números, Decidir junto: o PSA, Luzes do
@@ -53,7 +53,8 @@ Abra `/palco` uma vez com internet antes do evento (o service worker guarda tudo
 
 ## Pendências
 
-- Conferir no documento oficial: texto da nota MS/INCA sobre rastreamento, posicionamento atual da SBU,
-  DOI da Diretriz Brasileira de Hipertensão 2025 e a idade de rastreamento de diabetes da SBD.
+- Posicionamento SBU/SBOC/SBRT (2023): o conteúdo vem do Portal da Urologia e de imprensa; o texto
+  integral é restrito a associados. A Nota Técnica MS/INCA nº 9/2023, a Diretriz de Hipertensão 2025 e a
+  diretriz da SBD (2025) já estão conferidas, com DOI.
 - Ilustrações da história: geradas por IA (Cloudflare Workers AI, FLUX.2 klein 9B, com os retratos de Davi, Roberto e Lia como referência). Os retratos-base e o script ficaram fora do repo; para refazer, usar a chave em ioparlo-web/.env.local.
 - E-mails da campanha (`docs/01-campanha.md`) ainda sem os ajustes da revisão didática (`docs/02`).

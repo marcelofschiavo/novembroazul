@@ -27,8 +27,8 @@ export default function PaginaAdio() {
       id="adio"
       titulo="Por que eu adio"
       ideia="Não é falta de informação. São pensamentos automáticos — rápidos, convincentes e quase nunca verificados. Marque os que você mais escuta na sua cabeça."
-      porque="Na Terapia Cognitivo-Comportamental, responder a um pensamento automático (em vez de obedecer ou brigar com ele) diminui o peso dele. Pesquisas com homens brasileiros mostram por que eles adiam: o cuidado visto como coisa de mulher, o medo de descobrir doença, a vergonha e o horário do trabalho."
-      fontes={["gomes2007", "schraiber2010", "addis2003", "wong2017", "weinstein1980", "sweeny2010"]}
+      porque="Na Terapia Cognitivo-Comportamental, responder a um pensamento automático (em vez de obedecer ou brigar com ele) diminui o peso dele. Pesquisas com homens brasileiros mostram por que eles adiam: o cuidado visto como coisa de mulher, o medo de descobrir doença, a vergonha e o horário do trabalho. E uma revisão de intervenções mostra o que ajuda: exemplos de outros homens, informação clara, reconhecer os sintomas e enxergar o cuidado como força."
+      fontes={["gomes2007", "schraiber2010", "addis2003", "wong2017", "weinstein1980", "sweeny2010", "sagar2019"]}
       concluido={salvo}
     >
       <ul className="grid gap-3">

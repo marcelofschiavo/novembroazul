@@ -38,7 +38,7 @@ export default function PaginaPsa() {
       titulo="Decidir junto: o PSA"
       ideia="O exame de PSA pode ajudar e pode atrapalhar. Por isso a decisão é sua, com o médico — sabendo o que se ganha e o que se arrisca."
       porque="Ferramentas de apoio à decisão, como esta, aumentam o conhecimento, deixam a percepção de risco mais realista e reduzem o conflito na hora de decidir (revisão Cochrane). E números em “tantos em 1.000” são entendidos por muito mais gente do que porcentagens."
-      fontes={["harding2020", "erspc2025", "hamdy2023", "hugosson2022", "naji2018", "sbu", "msInca", "shepherd2011", "stacey2017", "gomes2008"]}
+      fontes={["harding2020", "erspc2025", "ilic2018", "hamdy2023", "hugosson2022", "naji2018", "sbu", "msInca", "santos2022", "shepherd2011", "stacey2017", "gomes2008"]}
       concluido={entendi}
     >
       <section>
@@ -63,7 +63,7 @@ export default function PaginaPsa() {
 
       <section className="mt-10">
         <h2 className="text-2xl font-bold text-ink">2. E no meu caso?</h2>
-        <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-line bg-surface p-4">
+        <div className="mt-4 flex flex-col gap-3 cartao p-4">
           <label className="block">
             <span className="font-bold text-ink">Sua idade</span>
             <input inputMode="numeric" value={idade} onChange={(e) => setIdade(e.target.value.replace(/\D/g, ""))} className="campo mt-1 max-w-[8rem]" />
@@ -78,7 +78,7 @@ export default function PaginaPsa() {
           </div>
         )}
         <p className="mt-3 text-sm text-muted">
-          A Sociedade Brasileira de Urologia recomenda conversar a partir dos 50 (45 para homens negros ou com pai ou irmão com a doença). O Ministério da Saúde e o INCA não recomendam o exame em massa em quem não tem sintomas. Os dois concordam: decisão individual, com o médico.
+          A Sociedade Brasileira de Urologia recomenda conversar a partir dos 50 (45 para homens negros ou com pai ou irmão com a doença). O Ministério da Saúde e o INCA (Nota Técnica nº 9/2023) não recomendam o exame em massa em quem não tem sintomas. Os dois concordam: decisão individual, com o médico.
         </p>
       </section>
 
@@ -93,10 +93,27 @@ export default function PaginaPsa() {
       </section>
 
       <section className="mt-10">
+        <div className="cartao-aceso p-5">
+          <h2 className="text-xl font-bold text-ink">Ferramenta brasileira para essa conversa</h2>
+          <p className="mt-1 text-ink-2">
+            O INCA criou e validou, com homens e médicos da atenção primária de 11 estados, um material de apoio à decisão sobre o PSA. Dá para levar à consulta.
+          </p>
+          <a
+            href="https://ninho.inca.gov.br/jspui/bitstream/123456789/10713/1/Ferramenta%20de%20apoio%20a%20decis%c3%a3o%20no%20rastreamento%20do%20c%c3%a2ncer%20de%20pr%c3%b3stata%20-%202021.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-flex items-center gap-2 rounded-full bg-acento px-4 py-2 text-sm font-bold text-sobre-acento hover:brightness-110"
+          >
+            Abrir a ferramenta do INCA (PDF) ↗
+          </a>
+        </div>
+      </section>
+
+      <section className="mt-10">
         <h2 className="text-2xl font-bold text-ink">4. Leve 3 perguntas</h2>
         <ol className="mt-3 flex flex-col gap-2">
           {["Quais são as minhas opções?", "Quais os benefícios e os riscos de cada uma?", "Qual a chance de isso acontecer comigo?"].map((p, i) => (
-            <li key={p} className="flex items-center gap-3 rounded-xl border border-line bg-surface px-4 py-3 text-lg font-bold text-ink">
+            <li key={p} className="flex items-center gap-3 cartao px-4 py-3 text-lg font-bold text-ink">
               <span className="dados flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-acento text-sm text-sobre-acento">{i + 1}</span>
               {p}
             </li>

@@ -127,7 +127,8 @@ export async function gerarCartao(n: MeusNumeros, p: PlanoEuVou): Promise<void> 
   [
     "Desde os 18: pressão, cintura, sono, cabeça, vacinas",
     "A partir dos 35: glicemia e colesterol",
-    "A partir dos 45-50: conversar sobre próstata e intestino",
+    "A partir dos 45-50: conversar sobre próstata",
+    "De 50 a 75: sangue oculto nas fezes a cada 2 anos (SUS)",
   ].forEach((t) => {
     const s = doc.splitTextToSize(`-  ${t}`, L - 2 * m);
     doc.text(s, x0, y2);

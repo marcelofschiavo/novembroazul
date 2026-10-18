@@ -173,7 +173,7 @@ export const BLOCOS: Bloco[] = [
         id: "2.2",
         tipo: "painel",
         titulo: "Quatro números que todo homem deveria saber",
-        fonteIds: ["diretrizHA2025", "omsCintura", "sbd2024", "lloydjones2022"],
+        fonteIds: ["diretrizHA2025", "omsCintura", "sbd2024"],
         notaApresentador: "Mão levantada: 'quem sabe a própria pressão?'. Depois: 'e a cintura?'. Ninguém precisa saber todos — a trilha ajuda a anotar.",
       },
       {
@@ -183,6 +183,19 @@ export const BLOCOS: Bloco[] = [
         destaque: "Pressão alta quase nunca avisa. Parte dos brasileiros tem e não sabe — só se descobre medindo.",
         fonteIds: ["diretrizHA2025", "malta2018", "vigitel2024"],
         notaApresentador: "Novidade da diretriz brasileira de 2025. Quase 3 em cada 10 adultos das capitais referem pressão alta (Vigitel). Diagnóstico só com mais de uma medida.",
+      },
+      {
+        id: "2.3b",
+        tipo: "numeros",
+        sobre: "Hábitos também são luz do painel",
+        titulo: "O que o homem carrega no dia a dia",
+        numeros: [
+          { valor: "27%", rotulo: "dos homens bebem de forma abusiva", detalhe: "5 doses ou mais numa ocasião · mulheres: 15%" },
+          { valor: "1 em 5", rotulo: "adultos dorme menos de 6 horas", detalhe: "1 em 4 homens tem sintoma de insônia" },
+        ],
+        destaque: "Não é para culpar ninguém: é para saber onde mexer primeiro.",
+        fonteIds: ["vigitel2023alcool", "vigitel2025sono"],
+        notaApresentador: "Dados do Vigitel, capitais. O sono foi medido pela primeira vez em 2025. Ligue com o Davi: ronca, dorme mal, explode por pouco.",
       },
       {
         id: "2.4",
@@ -224,11 +237,11 @@ export const BLOCOS: Bloco[] = [
         destaque: "Nem tudo, todo ano. O item certo, na idade certa — e o médico ajusta ao seu caso.",
         linhas: [
           { faixa: "Desde os 18", itens: ["Pressão em toda consulta", "Cintura e peso", "Sono, cabeça e álcool", "Vacinas em dia"] },
-          { faixa: "A partir dos 35", itens: ["Glicemia e colesterol", "O médico define de quanto em quanto tempo"] },
-          { faixa: "A partir dos 45–50", itens: ["Próstata: conversar sobre o PSA", "Intestino: conversar sobre o rastreamento"] },
+          { faixa: "A partir dos 35", itens: ["Glicemia, a cada 3 anos se normal", "Colesterol: o médico define a frequência"] },
+          { faixa: "A partir dos 45–50", itens: ["Próstata: conversar sobre o PSA", "Intestino (50 a 75): sangue oculto nas fezes a cada 2 anos, no SUS"] },
         ],
-        fonteIds: ["krogsboll2019", "diretrizHA2025", "sbd2024", "sbu"],
-        notaApresentador: "A montadora não troca todas as peças em toda revisão. Cada quilometragem tem seus itens. Próstata a partir dos 50 — ou 45 se negro ou com pai ou irmão com a doença.",
+        fonteIds: ["krogsboll2019", "diretrizHA2025", "sbd2024", "sbu", "fitSus2026"],
+        notaApresentador: "A montadora não troca todas as peças em toda revisão. Cada quilometragem tem seus itens. Duas novidades brasileiras: a Sociedade Brasileira de Diabetes antecipou a glicemia para os 35 anos (2025), e desde agosto de 2026 o SUS oferece o teste de sangue oculto nas fezes, dos 50 aos 75. Próstata: conversar a partir dos 50 — ou 45 se negro ou com pai ou irmão com a doença.",
       },
       {
         id: "4.2",
@@ -252,7 +265,7 @@ export const BLOCOS: Bloco[] = [
         tipo: "caixaFatos",
         titulo: "Próstata: o que 1.000 homens mostram",
         destaque: "Em 16 anos: 2 mortes a menos em cada 1.000. Do outro lado, biópsias de quem não tinha câncer e tratamento de câncer que não faria mal.",
-        fonteIds: ["harding2020", "erspc2025", "hoffrage2000"],
+        fonteIds: ["harding2020", "erspc2025", "ilic2018", "hoffrage2000"],
         notaApresentador: "Números absolutos, sempre. Não é argumento contra nem a favor do exame: é o que se coloca na balança para decidir com o médico. O ensaio europeu, com 23 anos, mostra 1 morte evitada a cada 456 homens convidados.",
       },
       {
@@ -261,10 +274,10 @@ export const BLOCOS: Bloco[] = [
         titulo: "Então: faço ou não faço o PSA?",
         colunas: [
           { titulo: "Sociedade Brasileira de Urologia", itens: ["Converse com o urologista a partir dos 50", "A partir dos 45 se você é negro ou tem pai ou irmão com a doença"], tom: "aceso" },
-          { titulo: "Ministério da Saúde e INCA", itens: ["Não fazer em massa em quem não tem sintomas", "Investigar sempre quem tem sinais"], tom: "aceso" },
+          { titulo: "Ministério da Saúde e INCA", itens: ["Nota Técnica 9/2023: não fazer em massa em quem não tem sintomas", "Para quem pede o exame: decisão compartilhada"], tom: "aceso" },
         ],
-        destaque: "Os dois concordam no essencial: a decisão é sua, com o médico, sabendo os prós e os contras.",
-        fonteIds: ["sbu", "msInca", "modesto2018"],
+        destaque: "Os dois concordam no essencial: a decisão é sua, com o médico, sabendo os prós e os contras. O INCA tem uma ferramenta brasileira para essa conversa.",
+        fonteIds: ["sbu", "msInca", "santos2022", "modesto2018"],
         notaApresentador: "Honestidade: as instituições divergem. Pesquisadores brasileiros falam de um 'novembro não tão azul' quando a campanha vira só PSA. Por isso hoje a conversa é por inteiro.",
       },
       {
@@ -301,8 +314,8 @@ export const BLOCOS: Bloco[] = [
           { valor: "78 mil", rotulo: "casos de próstata por ano", detalhe: "o 1º do homem" },
           { valor: "26 mil", rotulo: "casos de intestino por ano", detalhe: "o 2º do homem" },
         ],
-        destaque: "Sangue nas fezes ou intestino que mudou e não volta ao normal: consulta, em qualquer idade.",
-        fonteIds: ["inca2026"],
+        destaque: "Desde agosto de 2026, o SUS faz o teste de sangue oculto nas fezes dos 50 aos 75, a cada 2 anos. Com sintoma: consulta em qualquer idade.",
+        fonteIds: ["inca2026", "fitSus2026"],
         notaApresentador: "Quase nunca se fala do intestino no Novembro Azul. Sem detalhar exame: a mensagem é a luz de alerta.",
       },
       {
@@ -329,7 +342,7 @@ export const BLOCOS: Bloco[] = [
         titulo: "No homem, a depressão costuma vir disfarçada",
         colunas: [
           { titulo: "O que a gente espera ver", itens: ["Tristeza", "Choro", "Desânimo"], tom: "neutro" },
-          { titulo: "O que muitas vezes aparece", itens: ["Irritação e explosões", "Álcool a mais", "Risco e velocidade", "Trabalho sem parar", "Sumir dos amigos"], tom: "aceso" },
+          { titulo: "O que muitas vezes aparece", itens: ["Irritação e explosões", "Álcool a mais", "Risco e velocidade", "Sumir dos amigos"], tom: "aceso" },
         ],
         destaque: "Contando esses sinais, a diferença de depressão entre homens e mulheres desaparece.",
         fonteIds: ["martin2013", "brito2022"],
@@ -387,8 +400,8 @@ export const BLOCOS: Bloco[] = [
           { titulo: "Susto sem caminho", itens: ["A pessoa trava", "Evita o assunto", "Adia mais"], tom: "neutro" },
           { titulo: "Cobrança: “você PRECISA”", itens: ["Soa como ordem", "Ativa a resistência", "Vira briga, não consulta"], tom: "neutro" },
         ],
-        destaque: "O que funciona: um caminho claro e um convite.",
-        fonteIds: ["tannenbaum2015", "rains2013"],
+        destaque: "O que funciona com homens: exemplos de outros homens, informação clara, o caminho indicado — e cuidado apresentado como força.",
+        fonteIds: ["tannenbaum2015", "rains2013", "sagar2019"],
         notaApresentador: "Por isso esta palestra não usa foto de doença nem 'faça senão'. Reatância: quanto mais pressão, mais resistência.",
       },
       {
@@ -485,7 +498,7 @@ export const BLOCOS: Bloco[] = [
         titulo: "Agora, um plano de uma frase",
         exemplos: ["Se for segunda, depois do almoço, então eu ligo e marco.", "Se for o mês do meu aniversário, então eu faço a minha revisão."],
         fonteIds: ["gollwitzer2006", "dai2014"],
-        notaApresentador: "'Vou ver isso' não vira agenda. Quando, onde e o quê, sim. Data-marco — o aniversário — ajuda a lembrar todo ano. Quem quiser, monta na trilha e põe no celular.",
+        notaApresentador: "'Vou ver isso' não vira agenda. Quando, onde e o quê, sim. Detalhe que importa: num ensaio inglês, planos prontos impressos num folheto não funcionaram — o plano precisa ser escrito pela própria pessoa. Data-marco — o aniversário — ajuda a lembrar todo ano. Quem quiser, monta na trilha e põe no celular.",
       },
       {
         id: "8.3",

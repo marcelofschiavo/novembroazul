@@ -42,7 +42,7 @@ function ListaModulos({ modulos, concluidos, grade = false, numerar = false }: {
             <motion.div {...levanta} className="h-full">
               <Link
                 href={m.href}
-                className={`group flex h-full items-center gap-4 rounded-2xl border-2 bg-surface p-4 shadow-sm transition-colors hover:border-acento ${feito ? "border-acento" : "border-line"}`}
+                className={`cartao group flex h-full items-center gap-4 p-4 transition-colors hover:border-acento ${feito ? "!border-acento" : ""}`}
               >
                 <span aria-hidden className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${feito ? "bg-acento text-sobre-acento" : "bg-acento-wash text-acento-2"}`}>
                   {feito ? <Check className="h-6 w-6" strokeWidth={3} /> : <Icone className="h-6 w-6" strokeWidth={2} />}
@@ -76,23 +76,30 @@ export default function PaginaTrilha() {
   }, []);
 
   const feitos = MODULOS_TRILHA.filter((id) => concluidos.includes(id)).length;
+  const proximo = MODULOS_ESSENCIAIS.find((m) => !concluidos.includes(m.id));
   const fracao = feitos / MODULOS_TRILHA.length;
 
   return (
     <main className="mx-auto max-w-3xl px-5 py-10 sm:px-6 sm:py-12">
       <Marcas voltar={false} />
-      <div className="mt-8 flex items-start justify-between gap-4">
-        <div>
-          <p className="dados text-[11px] uppercase tracking-[0.18em] text-campanha">Trilha · Novembro Azul</p>
-          <h1 className="titulo mt-2 text-4xl text-ink sm:text-5xl">A sua revisão, por inteiro.</h1>
+      <section className="cartao-aceso mt-8 overflow-hidden p-6 sm:p-8">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="pilula dados whitespace-nowrap text-[11px] uppercase tracking-[0.16em] text-campanha">Novembro Azul</p>
+            <h1 className="titulo mt-3 text-4xl tracking-[-0.02em] text-ink sm:text-5xl">A sua revisão, por inteiro.</h1>
+          </div>
+          <AnelProgresso fracao={fracao} tamanho={76} />
         </div>
-        <AnelProgresso fracao={fracao} tamanho={72} />
-      </div>
-
-      <p className="mt-4 max-w-prose text-lg text-ink-2">
-        Sete passos curtos para sair do “depois eu vejo” para a consulta marcada. Sem cadastro: o que você
-        preenche fica só neste aparelho — nada vai para a empresa.
-      </p>
+        <p className="mt-4 max-w-prose text-lg text-ink-2">
+          Sete passos curtos para sair do “depois eu vejo” para a consulta marcada. Sem cadastro: o que você
+          preenche fica só neste aparelho — nada vai para a empresa.
+        </p>
+        {proximo && (
+          <Link href={proximo.href} className="mt-6 inline-flex items-center gap-2 rounded-full bg-acento px-6 py-3 font-bold text-sobre-acento shadow-sm transition hover:brightness-110">
+            {feitos === 0 ? "Começar" : "Continuar"}: {proximo.rotulo} <ArrowRight aria-hidden className="h-4 w-4" />
+          </Link>
+        )}
+      </section>
 
       <section className="mt-10">
         <h2 className="mb-1 text-2xl font-bold text-ink">O essencial</h2>

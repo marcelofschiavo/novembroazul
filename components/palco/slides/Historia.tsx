@@ -14,7 +14,7 @@ export function Cena({ src, alt }: { src: string; alt?: string }) {
       initial={{ opacity: 0, scale: 0.95, rotate: -1.2 }}
       animate={{ opacity: 1, scale: 1, rotate: 0 }}
       transition={{ duration: 0.7, delay: 0.15 }}
-      className="relative shrink-0 self-center overflow-hidden rounded-[2.4vmin] border-[0.5vmin] border-ink shadow-xl"
+      className="relative shrink-0 self-center overflow-hidden rounded-[3vmin] border border-line shadow-[0_30px_60px_-30px_rgba(11,30,58,0.55)] ring-[0.6vmin] ring-surface"
       style={{ aspectRatio: "1 / 1", width: "min(34vw, 58vh)" }}
     >
       <Image src={src} alt={alt ?? ""} fill sizes="34vw" className="object-cover" priority unoptimized />
@@ -95,7 +95,7 @@ export function Historia({ slide }: { slide: Slide }) {
                 <span className="dados text-palco-rodape font-bold uppercase tracking-wide text-muted">
                   {PERSONAGENS[f.quem].nome} · {PERSONAGENS[f.quem].descricao}
                 </span>
-                <blockquote className="rounded-[2.4vmin] rounded-tl-none bg-surface-2 px-[2.4vmin] py-[1.4vmin] text-palco-corpo font-bold leading-tight text-ink shadow-sm">
+                <blockquote className="cartao rounded-tl-none px-[2.4vmin] py-[1.4vmin] text-palco-corpo font-bold leading-tight text-ink">
                   “{f.texto}”
                 </blockquote>
               </div>

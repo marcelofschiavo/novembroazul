@@ -29,7 +29,7 @@ export default function PaginaLuzes() {
       titulo="Luzes do painel"
       ideia="Alguns sinais não esperam a revisão. Marque os que você tem notado — o resultado fica só aqui."
       porque="Dificuldade de ereção pode antecipar doença do coração (sinal dos vasos). Ronco com pausas é apneia em boa parte dos casos — e homens têm cerca de 4 vezes mais chance (estudo de São Paulo). No homem, depressão muitas vezes aparece como irritação e álcool, não como tristeza."
-      fontes={["inman2009", "tufik2010", "martin2013", "inca2026"]}
+      fontes={["inman2009", "tufik2010", "martin2013", "inca2026", "fitSus2026"]}
       concluido={revisado}
     >
       <ul className="grid gap-3">

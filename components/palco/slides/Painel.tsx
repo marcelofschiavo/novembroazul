@@ -48,7 +48,7 @@ export function Painel({ slide }: { slide: Slide }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 + i * 0.2 }}
-            className="flex flex-col items-center gap-[1vmin] rounded-[2.4vmin] border-2 border-line bg-surface p-[2vmin] text-center"
+            className="flex flex-col items-center gap-[1vmin] rounded-[2.4vmin] cartao p-[2vmin] text-center"
           >
             <div style={{ width: "min(13vw, 21vh)" }}>
               <Mostrador atraso={0.6 + i * 0.25} />

@@ -14,10 +14,10 @@ export function Capa({ slide }: { slide: Slide }) {
   return (
     <div className="grid w-full grid-cols-[1fr_auto] items-center gap-[5vmin]">
       <div className="flex min-w-0 flex-col gap-[3vmin]">
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="dados text-palco-nota font-semibold uppercase tracking-[0.2em] text-campanha">
-          Novembro Azul
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="pilula dados text-palco-nota font-semibold uppercase tracking-[0.18em] text-campanha">
+          Novembro Azul · saúde do homem
         </motion.p>
-        <motion.h2 initial="entra" animate="ativo" variants={escreve} className="titulo text-[length:calc(clamp(80px,11vw,190px)*var(--escala-texto,1))] leading-[0.92] text-ink">
+        <motion.h2 initial="entra" animate="ativo" variants={escreve} className="titulo text-[length:calc(clamp(80px,11vw,190px)*var(--escala-texto,1))] leading-[0.92] tracking-[-0.03em] text-ink">
           {slide.titulo}
         </motion.h2>
         {slide.destaque && (
@@ -26,8 +26,11 @@ export function Capa({ slide }: { slide: Slide }) {
           </motion.p>
         )}
       </div>
-      <motion.div initial={{ opacity: 0, rotate: -12 }} animate={{ opacity: 1, rotate: 0 }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} style={{ width: "min(40vw, 62vh)" }}>
-        <RodaGrafico rotulos={false} />
+      <motion.div initial={{ opacity: 0, rotate: -12 }} animate={{ opacity: 1, rotate: 0 }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="relative" style={{ width: "min(40vw, 62vh)" }}>
+        <div aria-hidden className="absolute inset-[6%] rounded-full bg-campanha-fill/25 blur-[6vmin]" />
+        <div className="relative">
+          <RodaGrafico rotulos={false} />
+        </div>
       </motion.div>
     </div>
   );

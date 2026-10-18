@@ -63,7 +63,7 @@ export default function PaginaReferencias() {
         {lista.map((r, i) => {
           const p = partes(r);
           return (
-            <motion.li key={r.id} variants={degrau} className="rounded-2xl border border-line bg-surface-2 p-6 shadow-sm">
+            <motion.li key={r.id} variants={degrau} className="cartao cartao-suave p-6 shadow-sm">
               <div className="flex items-start gap-4">
                 <span aria-hidden className="dados flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-acento text-sm font-bold text-sobre-acento">
                   {i + 1}

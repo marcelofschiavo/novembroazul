@@ -32,7 +32,7 @@ export default function PaginaCuida() {
         <h2 className="text-2xl font-bold text-ink">P.O.I.S. — para convidar sem cobrar</h2>
         <ol className="mt-4 grid gap-3">
           {POIS.map((p) => (
-            <li key={p.letra} className="flex gap-4 rounded-2xl border border-line bg-surface p-4">
+            <li key={p.letra} className="flex gap-4 cartao p-4">
               <span className="titulo flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-acento text-2xl text-sobre-acento">{p.letra}</span>
               <span>
                 <span className="block text-lg font-bold text-ink">{p.titulo}</span>

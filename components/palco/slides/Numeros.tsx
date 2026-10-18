@@ -17,9 +17,9 @@ export function Numeros({ slide }: { slide: Slide }) {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35 + i * 0.35, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col gap-[1vmin] border-t-[0.7vmin] border-campanha-fill pt-[2vmin]"
+            className="cartao flex flex-col gap-[0.8vmin] p-[2.2vmin]"
           >
-            <span className="titulo text-[length:calc(clamp(72px,9.5vw,170px)*var(--escala-texto,1))] leading-none text-campanha">{x.valor}</span>
+            <span className="titulo text-[length:calc(clamp(72px,9.5vw,170px)*var(--escala-texto,1))] leading-none texto-grad">{x.valor}</span>
             <span className="text-palco-corpo font-semibold leading-tight text-ink">{x.rotulo}</span>
             {x.detalhe && <span className="dados text-palco-nota text-muted">{x.detalhe}</span>}
           </motion.div>

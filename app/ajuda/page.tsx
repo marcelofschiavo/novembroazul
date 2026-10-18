@@ -22,7 +22,7 @@ export default function PaginaAjuda() {
         <BlocoAjuda />
       </div>
 
-      <section className="mt-8 rounded-2xl border border-line bg-surface p-5">
+      <section className="mt-8 cartao p-5">
         <h2 className="text-xl font-bold text-ink">Na empresa</h2>
         <p className="mt-2 text-ink-2">
           Cada empresa tem os seus benefícios — plano de saúde, programa de bem-estar, apoio psicológico, medicina do
@@ -31,7 +31,7 @@ export default function PaginaAjuda() {
         </p>
       </section>
 
-      <section className="mt-6 rounded-2xl border border-line bg-surface p-5">
+      <section className="mt-6 cartao p-5">
         <h2 className="text-xl font-bold text-ink">No SUS</h2>
         <p className="mt-2 text-ink-2">
           A Unidade Básica de Saúde (UBS) do seu bairro é a porta de entrada — também para o homem. Lá dá para medir a

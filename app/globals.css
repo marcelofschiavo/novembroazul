@@ -275,3 +275,93 @@ button:not(:disabled) { cursor: pointer; }
   outline: none;
 }
 .campo:focus { border-color: var(--acento); }
+
+/* ============================================================
+   REFINAMENTO VISUAL (out/2026) — brilho de fundo, cartões, números
+   ============================================================ */
+:root {
+  --brilho-1: rgba(58, 123, 213, 0.14);
+  --brilho-2: rgba(110, 92, 214, 0.08);
+  --grade: rgba(31, 91, 176, 0.035);
+  --sombra: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 18px 40px -24px rgba(11, 30, 58, 0.28);
+  --raio: 1.25rem;
+  --grad-num-1: #1F5BB0;
+  --grad-num-2: #2F7FD9;
+}
+[data-tema="palco"] {
+  --brilho-1: rgba(58, 123, 213, 0.26);
+  --brilho-2: rgba(124, 92, 214, 0.16);
+  --grade: rgba(125, 182, 255, 0.05);
+  --sombra: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 24px 48px -28px rgba(0, 0, 0, 0.6);
+  --raio: 2.6vmin;
+  --grad-num-1: #7DB6FF;
+  --grad-num-2: #B7D6FF;
+}
+[data-tema="palco"][data-claro="on"] {
+  --brilho-1: rgba(58, 123, 213, 0.14);
+  --brilho-2: rgba(110, 92, 214, 0.08);
+  --grade: rgba(31, 91, 176, 0.04);
+  --sombra: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 22px 44px -26px rgba(11, 30, 58, 0.3);
+  --grad-num-1: #1F5BB0;
+  --grad-num-2: #2C74CC;
+}
+[data-tema="palco"][data-contraste="max"] {
+  --brilho-1: transparent; --brilho-2: transparent; --grade: transparent; --sombra: none;
+  --grad-num-1: #8FD0FF; --grad-num-2: #8FD0FF;
+}
+
+/* Fundo do palco: dois brilhos suaves e uma grade quase invisível. */
+[data-tema="palco"] .palco-grade {
+  background:
+    radial-gradient(70vmax 55vmax at 108% -12%, var(--brilho-1), transparent 62%),
+    radial-gradient(60vmax 45vmax at -12% 112%, var(--brilho-2), transparent 62%),
+    linear-gradient(var(--grade) 1px, transparent 1px) 0 0 / 6vmin 6vmin,
+    linear-gradient(90deg, var(--grade) 1px, transparent 1px) 0 0 / 6vmin 6vmin,
+    var(--bg);
+}
+
+/* Trilha: um brilho no topo da página. */
+[data-tema="leitura"] body {
+  background:
+    radial-gradient(90rem 32rem at 85% -8rem, var(--brilho-1), transparent 70%),
+    radial-gradient(60rem 26rem at -10% -6rem, var(--brilho-2), transparent 70%),
+    var(--bg);
+  background-repeat: no-repeat;
+}
+
+/* Cartão: um padrão só, no palco e na trilha. */
+.cartao {
+  border: 1px solid var(--line);
+  border-radius: var(--raio);
+  background: linear-gradient(180deg, var(--surface) 0%, color-mix(in srgb, var(--surface) 70%, var(--surface-2)) 100%);
+  box-shadow: var(--sombra);
+}
+.cartao-suave {
+  background: color-mix(in srgb, var(--surface-2) 75%, transparent);
+  box-shadow: none;
+}
+.cartao-aceso {
+  border: 1.5px solid color-mix(in srgb, var(--campanha-fill) 70%, transparent);
+  border-radius: var(--raio);
+  background: linear-gradient(160deg, var(--campanha-wash) 0%, color-mix(in srgb, var(--campanha-wash) 55%, var(--surface)) 100%);
+  box-shadow: var(--sombra);
+}
+
+/* Números grandes em degradê (contraste garantido pelos dois tons). */
+.texto-grad {
+  background: linear-gradient(120deg, var(--grad-num-1), var(--grad-num-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Rótulo em pílula acima dos títulos. */
+.pilula {
+  display: inline-flex; align-items: center; gap: 0.6em;
+  width: fit-content;
+  border: 1px solid color-mix(in srgb, var(--campanha-fill) 45%, transparent);
+  background: color-mix(in srgb, var(--campanha-wash) 80%, transparent);
+  border-radius: 999px;
+  padding: 0.25em 0.9em;
+}
+.pilula::before { content: ""; width: 0.5em; height: 0.5em; border-radius: 999px; background: var(--campanha-fill); }

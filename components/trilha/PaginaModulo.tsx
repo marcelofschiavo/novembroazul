@@ -38,10 +38,19 @@ export function PaginaModulo({
     <main className="mx-auto max-w-2xl px-5 py-10 sm:px-6 sm:py-12">
       {concluido && <MarcarConcluido modulo={id} />}
       <Marcas />
-      <p className="dados mt-8 text-[11px] uppercase tracking-[0.18em] text-campanha">
+      {i >= 0 && (
+        <ol className="mt-8 flex gap-1.5" aria-label={`Passo ${i + 1} de ${MODULOS_ESSENCIAIS.length}`}>
+          {MODULOS_ESSENCIAIS.map((m, k) => (
+            <li key={m.id} className="flex-1">
+              <Link href={m.href} aria-label={m.rotulo} aria-current={k === i ? "step" : undefined} className={`block h-1.5 rounded-full transition-colors ${k < i ? "bg-acento/60" : k === i ? "bg-acento" : "bg-line-2"}`} />
+            </li>
+          ))}
+        </ol>
+      )}
+      <p className={`pilula dados ${i >= 0 ? "mt-5" : "mt-8"} text-[11px] uppercase tracking-[0.16em] text-campanha`}>
         {sobre ?? (i >= 0 ? `Passo ${i + 1} de ${MODULOS_ESSENCIAIS.length}` : "Pra ir além")}
       </p>
-      <h1 className="titulo mt-2 text-4xl text-ink sm:text-5xl">{titulo}</h1>
+      <h1 className="titulo mt-3 text-4xl tracking-[-0.02em] text-ink sm:text-5xl">{titulo}</h1>
       <p className="mt-3 text-lg leading-relaxed text-ink-2">{ideia}</p>
       {porque && <PorqueAjuda texto={porque} />}
       <div className="mt-8">{children}</div>
@@ -61,7 +70,7 @@ export function PaginaModulo({
 function PorqueAjuda({ texto }: { texto: string }) {
   const [aberto, setAberto] = useState(false);
   return (
-    <div className="mt-4 rounded-xl border border-line bg-surface-2 px-4 py-3">
+    <div className="mt-4 cartao cartao-suave px-4 py-3">
       <button onClick={() => setAberto((a) => !a)} aria-expanded={aberto} className="flex w-full items-center justify-between gap-3 text-left text-sm font-semibold text-ink-2">
         <span className="inline-flex items-center gap-2"><Lightbulb aria-hidden className="h-4 w-4 text-campanha" /> Por que isso ajuda</span>
         <span className="text-muted">{aberto ? "−" : "+"}</span>
@@ -81,7 +90,7 @@ export function Resultado({ tom, titulo, children }: { tom: "ok" | "atencao" | "
   }[tom];
   const cor = { ok: "text-ok", atencao: "text-atencao", alerta: "text-alerta", neutro: "text-ink-2" }[tom];
   return (
-    <div className={`rounded-xl border-l-4 px-4 py-3 ${estilo}`}>
+    <div className={`rounded-2xl border-l-4 px-4 py-3 ${estilo}`}>
       <p className={`font-bold ${cor}`}>{titulo}</p>
       {children && <div className="mt-1 text-[15px] leading-relaxed text-ink">{children}</div>}
     </div>

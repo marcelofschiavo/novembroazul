@@ -28,8 +28,8 @@ export const QUIZ: PerguntaQuiz[] = [
     pergunta: "Depois da próstata (e da pele), qual é o câncer mais frequente no homem brasileiro?",
     opcoes: ["Pulmão", "Intestino (cólon e reto)", "Estômago"],
     certa: 1,
-    explicacao: "São cerca de 26 mil casos por ano. Sangue nas fezes ou mudança no intestino que não passa: consulta, em qualquer idade.",
-    fonteIds: ["inca2026"],
+    explicacao: "São cerca de 26 mil casos por ano. Desde 2026, o SUS oferece o teste de sangue oculto nas fezes a cada 2 anos, dos 50 aos 75. E com sintoma — sangue nas fezes, intestino que mudou — é consulta em qualquer idade.",
+    fonteIds: ["inca2026", "fitSus2026"],
   },
   {
     id: "q4",

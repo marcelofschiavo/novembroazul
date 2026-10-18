@@ -11,7 +11,7 @@ export default function PaginaCabeca() {
       fontes={["martin2013", "brito2022", "palma2021", "wong2017", "holtlunstad2010", "oms2025", "cvv"]}
     >
       <section className="grid gap-4 sm:grid-cols-2">
-        <div className="rounded-2xl border border-line bg-surface-2 p-5">
+        <div className="cartao cartao-suave p-5">
           <h2 className="text-lg font-bold text-ink-2">O que a gente espera ver</h2>
           <ul className="mt-2 flex flex-col gap-1 text-ink-2">
             <li>▸ Tristeza</li>

@@ -10,7 +10,7 @@ import { referencia } from "@/conteudo/referencias";
 export function FontesModulo({ ids, nota }: { ids: string[]; nota?: string }) {
   const refs = ids.map(referencia);
   return (
-    <section aria-labelledby="fontes-modulo" className="mt-12 rounded-2xl border border-line bg-surface-2 p-5">
+    <section aria-labelledby="fontes-modulo" className="mt-12 cartao cartao-suave p-5">
       <h2 id="fontes-modulo" className="dados text-[11px] font-bold uppercase tracking-[0.16em] text-acento-2">
         Fontes deste módulo
       </h2>

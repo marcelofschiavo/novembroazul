@@ -47,7 +47,7 @@ export default function PaginaQuiz() {
           const r = respostas[q.id];
           const respondeu = r !== undefined;
           return (
-            <li key={q.id} className="rounded-2xl border border-line bg-surface p-5">
+            <li key={q.id} className="cartao p-5">
               <p className="dados text-xs font-bold uppercase text-muted">Pergunta {n + 1} de {QUIZ.length}</p>
               <p className="mt-1 text-lg font-bold text-ink">{q.pergunta}</p>
               <div className="mt-3 flex flex-col gap-2">

@@ -35,17 +35,17 @@ export default function PaginaPlano() {
       id="plano"
       titulo="Meu plano “Eu vou”"
       ideia="“Vou ver isso” não vira agenda. Uma frase com quando e o quê, sim. Monte a sua, ponha no celular e leve o cartão de bolso."
-      porque="Em 94 estudos, planos do tipo “se for tal momento, então eu faço tal coisa” aumentaram de forma média a grande a chance de cumprir o que se planejou. Datas-marco, como o aniversário, dão um empurrão extra (efeito “recomeço”). E pensar no seu “eu” do futuro ajuda — mas o efeito dura pouco: por isso a carta vem colada ao plano."
-      fontes={["gollwitzer2006", "dai2014", "rutchick2018", "pnaish2009"]}
+      porque="Em 94 estudos, planos do tipo “se for tal momento, então eu faço tal coisa” aumentaram de forma média a grande a chance de cumprir o que se planejou. Datas-marco, como o aniversário, dão um empurrão extra (efeito “recomeço”). Um detalhe importante: planos prontos, impressos num folheto, não funcionaram num ensaio de rastreamento — o plano precisa ser seu, com o seu quando e o seu onde. E pensar no seu “eu” do futuro ajuda, mas o efeito dura pouco: por isso a carta vem colada ao plano."
+      fontes={["gollwitzer2006", "lo2014", "dai2014", "rutchick2018", "pnaish2009"]}
       concluido={salvo}
     >
-      <section className="rounded-2xl border border-line bg-surface p-5">
+      <section className="cartao p-5">
         <h2 className="text-xl font-bold text-ink">1. Um minuto com o seu “eu” de 70 anos (opcional)</h2>
         <p className="mt-1 text-ink-2">Onde você quer estar aos 70? Com quem? Fazendo o quê? O que esse homem pediria pra você fazer esta semana?</p>
         <textarea value={p.carta} onChange={(e) => setP({ ...p, carta: e.target.value })} onBlur={() => salvar()} rows={3} maxLength={400} className="campo mt-3" placeholder="Escreva pra ele — ou dele pra você." />
       </section>
 
-      <section className="mt-6 rounded-2xl border border-line bg-surface p-5">
+      <section className="mt-6 cartao p-5">
         <h2 className="text-xl font-bold text-ink">2. A frase</h2>
         <label className="mt-3 block">
           <span className="font-bold text-ink">Se for…</span>
@@ -72,7 +72,7 @@ export default function PaginaPlano() {
         )}
       </section>
 
-      <section className="mt-6 rounded-2xl border border-line bg-surface p-5">
+      <section className="mt-6 cartao p-5">
         <h2 className="text-xl font-bold text-ink">3. A data e a revisão anual</h2>
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
           <label className="block">

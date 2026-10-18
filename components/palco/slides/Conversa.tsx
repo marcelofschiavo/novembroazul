@@ -45,7 +45,7 @@ export function DuasColunas({ slide }: { slide: Slide }) {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + i * 0.4 }}
-              className={`flex flex-col gap-[1.2vmin] rounded-[2.4vmin] p-[2.2vmin] ${aceso ? "border-[3px] border-campanha-fill bg-campanha-wash" : "border-2 border-line bg-surface-2"}`}
+              className={`flex flex-col gap-[1.2vmin] rounded-[2.4vmin] p-[2.2vmin] ${aceso ? "cartao-aceso" : "cartao cartao-suave"}`}
             >
               <span className={`titulo text-palco-corpo ${aceso ? "text-campanha" : "text-ink-2"}`}>{c.titulo}</span>
               <ul className="flex flex-col gap-[0.6vmin]">
@@ -98,7 +98,7 @@ export function Passos({ slide }: { slide: Slide }) {
           <motion.li
             key={x.titulo}
             variants={degrau}
-            className={comTexto ? "flex flex-col gap-[1.4vmin] rounded-[2.4vmin] border-2 border-line bg-surface p-[2.4vmin]" : "flex items-center gap-[2.4vmin]"}
+            className={comTexto ? "flex flex-col gap-[1.4vmin] rounded-[2.4vmin] cartao p-[2.4vmin]" : "flex items-center gap-[2.4vmin]"}
           >
             <span className="titulo flex h-[8vmin] w-[8vmin] shrink-0 items-center justify-center rounded-full bg-acento text-palco-corpo text-sobre-acento">
               {comTexto ? x.titulo[0] : i + 1}
@@ -123,7 +123,7 @@ export function Pensamentos({ slide }: { slide: Slide }) {
         {pares.map((p, i) => {
           const base = 0.5 + i * 1.3;
           return (
-            <motion.li key={p.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: base }} className="flex flex-col gap-[1vmin] rounded-[2.4vmin] border-2 border-line bg-surface p-[2.2vmin]">
+            <motion.li key={p.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: base }} className="flex flex-col gap-[1vmin] rounded-[2.4vmin] cartao p-[2.2vmin]">
               <span className="relative w-fit text-palco-nota font-bold text-ink-2">
                 “{p.automatico}”
                 <motion.span
@@ -192,7 +192,7 @@ export function Caminhos({ slide }: { slide: Slide }) {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 + i * 1.2 }}
-              className={`flex flex-col gap-[1.8vmin] rounded-[2.4vmin] p-[2.8vmin] ${aceso ? "border-[3px] border-campanha-fill bg-campanha-wash" : "border-2 border-line bg-surface-2"}`}
+              className={`flex flex-col gap-[1.8vmin] rounded-[2.4vmin] p-[2.8vmin] ${aceso ? "cartao-aceso" : "cartao cartao-suave"}`}
             >
               <span className={`dados text-palco-rodape font-bold uppercase tracking-[0.14em] ${aceso ? "text-campanha" : "text-muted"}`}>{c.rotulo}</span>
               <span className={`titulo text-palco-corpo leading-tight ${aceso ? "text-ink" : "text-ink-2"}`}>“{c.fala}”</span>
@@ -281,7 +281,7 @@ export function OndeIr({ slide }: { slide: Slide }) {
       <Titulo titulo={slide.titulo} />
       <motion.ul initial="entra" animate="ativo" variants={escada(0.15, 0.3)} className="grid grid-cols-4 gap-[2vmin]">
         {LUGARES.map(({ icone: Icone, titulo, texto }) => (
-          <motion.li key={titulo} variants={degrau} className="flex flex-col gap-[1.4vmin] rounded-[2.4vmin] border-2 border-line bg-surface p-[2.4vmin]">
+          <motion.li key={titulo} variants={degrau} className="flex flex-col gap-[1.4vmin] rounded-[2.4vmin] cartao p-[2.4vmin]">
             <Icone aria-hidden className="h-[6vmin] w-[6vmin] text-campanha" strokeWidth={2} />
             <span className="titulo text-palco-nota leading-tight text-ink">{titulo}</span>
             <span className="text-palco-rodape font-semibold leading-snug text-ink-2">{texto}</span>
