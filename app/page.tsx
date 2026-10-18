@@ -36,7 +36,8 @@ export default function PaginaInicial() {
           <p className="text-sm text-muted">
             Sem cadastro: o que você preenche fica só no seu aparelho. ·{" "}
             <Link href="/palestrante" className="underline hover:text-ink">sobre o palestrante</Link> ·{" "}
-            <Link href="/trilha/referencias" className="underline hover:text-ink">referências</Link>
+            <Link href="/trilha/referencias" className="underline hover:text-ink">referências</Link> ·{" "}
+            <Link href="/campanha" className="underline hover:text-ink">material para o RH</Link>
           </p>
         </div>
       </div>

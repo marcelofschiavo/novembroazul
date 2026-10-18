@@ -10,6 +10,9 @@ Produção: `trilhanovembroazul.vercel.app` · repo `github.com/marcelofschiavo/
 - **`/palco`** — a apresentação (44 slides, ~45 min + perguntas). Presencial ou on-line, teclado ou
   passador, funciona offline depois de aberta uma vez. `?s=4.3` abre direto num slide.
 - **`/palco/aguardando`** — tela de espera enquanto a turma chega.
+- **`/campanha`** — kit para o RH: 9 e-mails prontos para colar (formatado ou texto puro), mensagens
+  curtas, cards para intranet, cartaz A4 (PDF e PNG) e cartões de bolso (A4, frente e verso). Genérico,
+  com campos [DATA], [HORÁRIO] e [LOCAL OU LINK] para o RH preencher. Não aparece em buscadores.
 - **`/trilha`** — 7 passos essenciais (Roda da Saúde, Meus números, Decidir junto: o PSA, Luzes do
   painel, Por que eu adio, Meu plano "Eu vou", Quiz) + extras (Para quem cuida dele, Cabeça, Sono e
   turno, Reveja a palestra, Referências). Certificado, cartão de bolso em PDF e lembrete `.ics`,
@@ -57,4 +60,5 @@ Abra `/palco` uma vez com internet antes do evento (o service worker guarda tudo
   integral é restrito a associados. A Nota Técnica MS/INCA nº 9/2023, a Diretriz de Hipertensão 2025 e a
   diretriz da SBD (2025) já estão conferidas, com DOI.
 - Ilustrações da história: geradas por IA (Cloudflare Workers AI, FLUX.2 klein 9B, com os retratos de Davi, Roberto e Lia como referência). Os retratos-base e o script ficaram fora do repo; para refazer, usar a chave em ioparlo-web/.env.local.
-- E-mails da campanha (`docs/01-campanha.md`) ainda sem os ajustes da revisão didática (`docs/02`).
+- Impressos do kit: `node scripts/gerar-kit.mjs` regera `public/kit/` (precisa do Chrome e de internet
+  para a fonte). Conteúdo dos e-mails: `conteudo/campanha.ts`.

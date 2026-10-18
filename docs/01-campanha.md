@@ -1,4 +1,8 @@
-# 01 · Campanha · Por inteiro — rascunhos para aprovação
+# 01 · Campanha · Por inteiro — rascunhos (substituídos)
+
+> **Versão final:** `conteudo/campanha.ts` e a página `/campanha` (kit para o RH, 18/10/2026).
+> Este arquivo guarda só os rascunhos de 15/10; os textos finais foram atualizados com a revisão
+> didática e as fontes de 2025–2026.
 
 > Nome de trabalho: **Por inteiro** (pendente). Campanha **genérica**: serve a qualquer empresa, sem nome de cliente.
 > Marcadores a preencher só se houver palestra: `{DATA_PALESTRA}`, `{HORARIO}`; e `{LINK}`. Todo e-mail termina com o rodapé padrão (abaixo).

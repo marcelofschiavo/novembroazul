@@ -17,3 +17,6 @@ _ref/
 
 # proposta comercial com dados de cliente: nunca vai para o GitHub
 /proposta/
+
+# temporários do gerador do kit
+/.kit-tmp/
