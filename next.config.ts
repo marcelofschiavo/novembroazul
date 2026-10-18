@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Endereço curto para mandar ao RH: trilhanovembroazul.vercel.app/rh
+  redirects() {
+    return [{ source: "/rh", destination: "/campanha", permanent: false }];
+  },
 };
 
 export default nextConfig;
