@@ -102,36 +102,65 @@ export function Quilometragem({ slide }: { slide: Slide }) {
   );
 }
 
-/** Caixa de fatos: 1.000 homens com e sem rastreamento, com as mortes por câncer de próstata acesas. */
+/** Ponto de um homem: cheio = morreu de câncer de próstata; vazado e tracejado = morte evitada. */
+function Ponto({ evitada }: { evitada?: boolean }) {
+  return (
+    <span
+      aria-hidden
+      className={`inline-block h-[2.6vmin] w-[2.6vmin] shrink-0 rounded-full ${evitada ? "border-[0.5vmin] border-dashed border-ok" : "bg-alerta"}`}
+    />
+  );
+}
+
+/**
+ * Caixa de fatos do PSA em formato de balança: de um lado, as mortes por
+ * câncer de próstata em 1.000 homens (12 sem o exame, 10 com); do outro, o
+ * que o exame pode trazer. Números absolutos, sem porcentagem.
+ */
 export function CaixaFatos({ slide }: { slide: Slide }) {
   const grupos = [
-    { rotulo: "Com rastreamento", mortes: 10 },
-    { rotulo: "Sem rastreamento", mortes: 12 },
+    { rotulo: "Sem o exame", mortes: 12, evitadas: 0 },
+    { rotulo: "Com o exame", mortes: 10, evitadas: 2 },
+  ];
+  const riscos = [
+    "Alarme falso: PSA alto sem câncer, e biópsia sem precisar",
+    "Achar um câncer que nunca faria mal — e tratar mesmo assim",
+    "Efeitos do tratamento no xixi e na ereção",
   ];
   return (
-    <div className="flex w-full flex-col gap-[2vmin]">
-      <Titulo sobre="Caixa de fatos · 16 anos de acompanhamento" titulo={slide.titulo} />
-      <div className="grid grid-cols-2 gap-[4vmin]">
-        {grupos.map((g, gi) => (
-          <motion.div key={g.rotulo} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 + gi * 0.4 }} className="flex flex-col gap-[1.2vmin]">
-            <div className="flex items-baseline justify-between gap-4">
-              <span className="titulo text-palco-nota text-ink">{g.rotulo}</span>
-              <span className="text-palco-nota font-bold text-campanha">
-                <span className="titulo text-palco-corpo">{g.mortes}</span> em 1.000
+    <div className="flex w-full flex-col gap-[2.6vmin]">
+      <Titulo sobre="Caixa de fatos · 1.000 homens acompanhados por 16 anos" titulo={slide.titulo} />
+      <div className="grid grid-cols-[1.35fr_1fr] gap-[3vmin]">
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="cartao-aceso flex flex-col gap-[1.4vmin] rounded-[2.4vmin] p-[2.2vmin]">
+          <span className="titulo text-palco-corpo text-campanha">O que o exame ajuda</span>
+          <span className="text-palco-nota font-semibold text-ink-2">Morreram de câncer de próstata, em cada 1.000:</span>
+          {grupos.map((g) => (
+            <div key={g.rotulo} className="grid grid-cols-[auto_1fr_auto] items-center gap-[2vmin]">
+              <span className="text-palco-nota font-bold text-ink">{g.rotulo}</span>
+              <span className="flex gap-[0.5vmin]" role="img" aria-label={`${g.rotulo}: ${g.mortes} em 1.000`}>
+                {Array.from({ length: g.mortes }, (_, i) => <Ponto key={i} />)}
+                {Array.from({ length: g.evitadas }, (_, i) => <Ponto key={`e${i}`} evitada />)}
               </span>
+              <span className="titulo text-palco-corpo text-ink">{g.mortes}</span>
             </div>
-            <svg viewBox="0 0 400 160" className="w-full" style={{ maxHeight: "22vh" }} role="img" aria-label={`${g.rotulo}: ${g.mortes} mortes por câncer de próstata em 1.000 homens`}>
-              {Array.from({ length: 1000 }, (_, i) => {
-                const col = i % 50;
-                const lin = Math.floor(i / 50);
-                const aceso = i < g.mortes;
-                return <circle key={i} cx={4 + col * 8} cy={4 + lin * 8} r={aceso ? 3.6 : 2.6} fill={aceso ? "var(--alerta)" : "var(--line-2)"} />;
-              })}
-            </svg>
-          </motion.div>
-        ))}
+          ))}
+          <p className="flex items-center gap-[1.2vmin] text-palco-nota font-bold text-ink">
+            <Ponto evitada /> = 2 mortes a menos em cada 1.000 homens
+          </p>
+          <p className="dados text-palco-rodape text-muted">Mortes por qualquer causa: iguais nos dois grupos.</p>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="cartao cartao-suave flex flex-col gap-[1.4vmin] rounded-[2.4vmin] p-[2.2vmin]">
+          <span className="titulo text-palco-corpo text-ink-2">O que o exame pode trazer</span>
+          <ul className="flex flex-col gap-[1.4vmin]">
+            {riscos.map((r) => (
+              <li key={r} className="flex items-baseline gap-[1.2vmin] text-palco-nota font-semibold leading-snug text-ink">
+                <span aria-hidden className="text-muted">▸</span>
+                {r}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
       </div>
-      <p className="dados text-palco-rodape text-muted">Cada ponto é um homem. Os pontos maiores, no canto, são as mortes por câncer de próstata.</p>
       <Destaque texto={slide.destaque} atraso={1.4} />
     </div>
   );

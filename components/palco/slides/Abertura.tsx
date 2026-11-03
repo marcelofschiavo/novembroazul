@@ -80,6 +80,11 @@ export function Pergunta({ slide }: { slide: Slide }) {
       <motion.h2 initial="entra" animate="ativo" variants={escreve} className="titulo max-w-[80vw] text-palco-titulo text-ink">
         {slide.titulo}
       </motion.h2>
+      {slide.destaque && (
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="-mt-[3vmin] max-w-[80vw] text-palco-nota font-semibold text-ink-2">
+          {slide.destaque}
+        </motion.p>
+      )}
       {slide.segunda && (
         <motion.h2
           initial={{ opacity: 0, y: 24 }}

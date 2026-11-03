@@ -10,18 +10,18 @@ import { slidesEmSequencia, type SlideNaSequencia } from "@/conteudo/blocos";
 export const SEQUENCIA_PALCO = slidesEmSequencia();
 
 /**
- * Versão curta (/palcocurto, cerca de 25 min): os pontos centrais de cada
+ * Versão curta (/palcocurto, cerca de 35 min): os pontos centrais de cada
  * bloco, com a história de Davi, Roberto e Lia do começo ao fim. Mesmos
  * slides da versão completa — só a seleção muda.
  */
 const IDS_CURTA = [
   "1.1", "1.2", "1.3", "1.4", "1.5", "1.6",
-  "2.2", "2.3",
-  "3.1", "3.1r",
-  "4.1", "4.2", "4.3", "4.4", "4.6", "4.8",
-  "5.1",
-  "6.4",
-  "7.2",
+  "2.2", "2.3", "2.3b",
+  "3.1", "3.1r", "3.3", "3.3r",
+  "4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8",
+  "5.1", "5.2", "5.3",
+  "6.2", "6.4",
+  "7.1", "7.2",
   "8.2", "8.4", "8.5",
   "9.1",
 ];

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { PaginaModulo, Resultado } from "@/components/trilha/PaginaModulo";
 import { RodaGrafico } from "@/components/ui/RodaGrafico";
-import { AREAS_RODA } from "@/conteudo/saude";
+import { AREAS_RODA, comentarioNota } from "@/conteudo/saude";
 import { lerRoda, gravarRoda, hojeISO, type EstadoRoda } from "@/lib/local";
 
 const INICIAL = Object.fromEntries(AREAS_RODA.map((a) => [a.id, 5])) as Record<string, number>;
@@ -40,7 +40,7 @@ export default function PaginaRoda() {
     <PaginaModulo
       id="roda"
       titulo="Minha Roda da Saúde"
-      ideia="Dê uma nota de 0 a 10 para cada área da sua vida, do jeito que está hoje. Não é a nota mais baixa que importa: é a roda girar torta."
+      ideia="Dê uma nota de 0 a 10 para cada área da sua vida, do jeito que está hoje. Embaixo de cada barra, uma frase mostra o que aquela nota costuma querer dizer. Não é a nota mais baixa que importa: é a roda girar torta."
       porque="Saúde é corpo, cabeça e as pessoas em volta ao mesmo tempo (modelo biopsicossocial). A Roda é uma ferramenta de reflexão — não é teste, não dá diagnóstico: dá direção. Escolher uma área só deixa o próximo passo pequeno e possível."
       fontes={["engel1977", "modesto2018"]}
       concluido={!!estado.atual}
@@ -68,8 +68,11 @@ export default function PaginaRoda() {
               value={notas[a.id]}
               onChange={(e) => setNotas({ ...notas, [a.id]: Number(e.target.value) })}
               className="mt-2 w-full accent-[var(--acento)]"
-              aria-valuetext={`${notas[a.id]} de 10`}
+              aria-valuetext={`${notas[a.id]} de 10: ${comentarioNota(a, notas[a.id])}`}
             />
+            <span aria-hidden className="mt-1 block text-sm italic text-ink-2">
+              {notas[a.id]} = {comentarioNota(a, notas[a.id])}
+            </span>
           </label>
         ))}
       </div>

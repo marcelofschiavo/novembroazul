@@ -26,10 +26,10 @@ export const PALESTRANTE = {
     "Especialista em Terapia Cognitivo-Comportamental",
     "Palestrante em campanhas de saúde nas empresas",
     "Ator · DRT 40876/SP",
-    "Atende em português, inglês, italiano e espanhol",
+    "Atende em português, inglês e italiano",
   ],
   bio:
-    "Marcelo Ferreira Schiavo é psicólogo clínico (CRP 06/109462), especialista em Terapia Cognitivo-Comportamental, MBA em Gestão de Pessoas e ator (DRT 40876/SP). Há 15 anos atua da clínica às empresas: atende em português, inglês, italiano e espanhol pela Mindheart Human Development e conduz palestras, treinamentos e programas de saúde e desenvolvimento para empresas — com campanhas e programas de saúde em empresas desde 2021. Foi professor universitário de Psicologia e voluntário do CVV. Também desenvolve as plataformas que usa nas palestras, como esta trilha.",
+    "Marcelo Ferreira Schiavo é psicólogo clínico (CRP 06/109462), especialista em Terapia Cognitivo-Comportamental, MBA em Gestão de Pessoas e ator (DRT 40876/SP). Há 15 anos atua da clínica às empresas: atende em português, inglês e italiano pela Mindheart Human Development e conduz palestras, treinamentos e programas de saúde e desenvolvimento para empresas — com campanhas e programas de saúde em empresas desde 2021. Foi professor universitário de Psicologia e voluntário do CVV. Também desenvolve as plataformas que usa nas palestras, como esta trilha.",
   contatos: [
     { rede: "Instagram", rotulo: "@marceloschiavopsi", href: "https://www.instagram.com/marceloschiavopsi/" },
     { rede: "LinkedIn", rotulo: "in/marcelofschiavo", href: "https://www.linkedin.com/in/marcelofschiavo" },
