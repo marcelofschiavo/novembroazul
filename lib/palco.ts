@@ -1,6 +1,6 @@
 "use client";
 
-import { slidesEmSequencia } from "@/conteudo/blocos";
+import { slidesEmSequencia, type SlideNaSequencia } from "@/conteudo/blocos";
 
 /**
  * Navegação do palco. Puramente local — sem Supabase, sem sessão, sem
@@ -9,22 +9,44 @@ import { slidesEmSequencia } from "@/conteudo/blocos";
  */
 export const SEQUENCIA_PALCO = slidesEmSequencia();
 
-const CHAVE_POSICAO = "na26:palco:posicao";
+/**
+ * Versão curta (/palcocurto, cerca de 25 min): os pontos centrais de cada
+ * bloco, com a história de Davi, Roberto e Lia do começo ao fim. Mesmos
+ * slides da versão completa — só a seleção muda.
+ */
+const IDS_CURTA = [
+  "1.1", "1.2", "1.3", "1.4", "1.5", "1.6",
+  "2.2", "2.3",
+  "3.1", "3.1r",
+  "4.1", "4.2", "4.3", "4.4", "4.6", "4.8",
+  "5.1",
+  "6.4",
+  "7.2",
+  "8.2", "8.4", "8.5",
+  "9.1",
+];
+export const SEQUENCIA_CURTA: SlideNaSequencia[] = IDS_CURTA.map((id) => {
+  const s = SEQUENCIA_PALCO.find((x) => x.slide.id === id);
+  if (!s) throw new Error(`Slide ${id} não existe na palestra`);
+  return s;
+});
 
-export function indiceDoSlide(slideId: string | null): number {
+export const CHAVE_POSICAO = "na26:palco:posicao";
+export const CHAVE_POSICAO_CURTA = "na26:palcocurto:posicao";
+
+export function indiceDoSlide(seq: SlideNaSequencia[], slideId: string | null): number {
   if (!slideId) return 0;
-  const i = SEQUENCIA_PALCO.findIndex((s) => s.slide.id === slideId);
+  const i = seq.findIndex((s) => s.slide.id === slideId);
   return i === -1 ? 0 : i;
 }
 
-export function lerPosicaoSalva(): number {
+export function lerPosicaoSalva(seq: SlideNaSequencia[], chave: string): number {
   if (typeof window === "undefined") return 0;
-  const id = window.localStorage.getItem(CHAVE_POSICAO);
-  return indiceDoSlide(id);
+  return indiceDoSlide(seq, window.localStorage.getItem(chave));
 }
 
-export function salvarPosicao(indice: number): void {
+export function salvarPosicao(seq: SlideNaSequencia[], chave: string, indice: number): void {
   if (typeof window === "undefined") return;
-  const slide = SEQUENCIA_PALCO[indice];
-  if (slide) window.localStorage.setItem(CHAVE_POSICAO, slide.slide.id);
+  const slide = seq[indice];
+  if (slide) window.localStorage.setItem(chave, slide.slide.id);
 }

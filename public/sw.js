@@ -5,13 +5,14 @@
  * cache para navegação. Precache é resiliente de propósito: um item que
  * falhe não pode derrubar a instalação inteira.
  */
-const VERSAO = "na26-v1";
+const VERSAO = "na26-v2";
 const CACHE_ESTATICO = `${VERSAO}-estatico`;
 const CACHE_PAGINAS = `${VERSAO}-paginas`;
 
 const PRECACHE = [
   "/",
   "/palco",
+  "/palcocurto",
   "/palco/aguardando",
   "/trilha",
   "/ajuda",

@@ -4,7 +4,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MotionConfig, motion } from "motion/react";
 import { Settings } from "lucide-react";
 import { slide as slideVariant, semMovimento } from "@/lib/motion";
-import { SEQUENCIA_PALCO as SEQUENCIA, lerPosicaoSalva, salvarPosicao, indiceDoSlide } from "@/lib/palco";
+import { SEQUENCIA_PALCO, CHAVE_POSICAO, lerPosicaoSalva, salvarPosicao, indiceDoSlide } from "@/lib/palco";
+import type { SlideNaSequencia } from "@/conteudo/blocos";
 import { Slide } from "./Slide";
 import { Rodape } from "./Rodape";
 import { NavBlocos } from "./NavBlocos";
@@ -54,7 +55,10 @@ const CHAVE_CONFIG = "na26:palco:config";
  * Motor de apresentação — puro local, sem servidor. O palestrante conduz de
  * teclado ou mouse; nada aqui depende de rede.
  */
-export function MotorPalco() {
+export function MotorPalco({
+  sequencia: SEQUENCIA = SEQUENCIA_PALCO,
+  chavePosicao = CHAVE_POSICAO,
+}: { sequencia?: SlideNaSequencia[]; chavePosicao?: string } = {}) {
   // Começa em 0 e só restaura a posição salva depois de montar: o servidor não
   // tem localStorage, e ler na primeira renderização causa erro de hidratação.
   const [indice, setIndice] = useState(0);
@@ -77,7 +81,7 @@ export function MotorPalco() {
     // ?s=<id do slide> abre direto num slide (ensaio, conferência de tela).
     const pedido = new URLSearchParams(window.location.search).get("s");
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIndice(pedido ? indiceDoSlide(pedido) : lerPosicaoSalva());
+    setIndice(pedido ? indiceDoSlide(SEQUENCIA, pedido) : lerPosicaoSalva(SEQUENCIA, chavePosicao));
     try {
       const c = JSON.parse(window.localStorage.getItem(CHAVE_CONFIG) ?? "null");
       if (c) {
@@ -91,7 +95,7 @@ export function MotorPalco() {
       // sem localStorage ou JSON inválido: segue com o padrão
     }
     setMontado(true);
-  }, []);
+  }, [SEQUENCIA, chavePosicao]);
 
   const atual = SEQUENCIA[indice];
   const reduzido = animOff || sistemaReduz;
@@ -111,8 +115,8 @@ export function MotorPalco() {
     const alvo = Math.min(Math.max(novoIndice, 0), SEQUENCIA.length - 1);
     setDirecao(dir);
     setIndice(alvo);
-    salvarPosicao(alvo);
-  }, []);
+    salvarPosicao(SEQUENCIA, chavePosicao, alvo);
+  }, [SEQUENCIA, chavePosicao]);
 
   useEffect(() => {
     function aoTeclar(e: KeyboardEvent) {
@@ -192,7 +196,7 @@ export function MotorPalco() {
     }
     window.addEventListener("keydown", aoTeclar);
     return () => window.removeEventListener("keydown", aoTeclar);
-  }, [indice, irPara, ajudaOn]);
+  }, [indice, irPara, ajudaOn, SEQUENCIA]);
 
   useEffect(() => {
     if (ajudaOn) fecharRef.current?.focus();
