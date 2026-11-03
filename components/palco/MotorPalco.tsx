@@ -76,6 +76,7 @@ export function MotorPalco({
   const [paleta, setPaleta] = useState<Paleta>("azul");
   const [fonte, setFonte] = useState<Fonte>("padrao");
   const fecharRef = useRef<HTMLButtonElement>(null);
+  const toqueRef = useRef<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
     // ?s=<id do slide> abre direto num slide (ensaio, conferência de tela).
@@ -96,6 +97,29 @@ export function MotorPalco({
     }
     setMontado(true);
   }, [SEQUENCIA, chavePosicao]);
+
+  // Celular: a palestra é desenhada para 16:9. Em vez de reorganizar o slide
+  // numa tela estreita, o navegador desenha em 1920 px (como na TV) e reduz
+  // para caber. Em pé, pede para girar o aparelho.
+  const [celular, setCelular] = useState(false);
+  const [emPe, setEmPe] = useState(false);
+  const [verAssim, setVerAssim] = useState(false);
+  useEffect(() => {
+    if (Math.min(window.screen.width, window.screen.height) >= 700) return;
+    const meta = document.querySelector<HTMLMetaElement>('meta[name="viewport"]');
+    const original = meta?.getAttribute("content") ?? null;
+    meta?.setAttribute("content", "width=1920");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCelular(true);
+    const m = window.matchMedia("(orientation: portrait)");
+    const aoGirar = () => setEmPe(m.matches);
+    aoGirar();
+    m.addEventListener("change", aoGirar);
+    return () => {
+      m.removeEventListener("change", aoGirar);
+      if (meta && original !== null) meta.setAttribute("content", original);
+    };
+  }, []);
 
   const atual = SEQUENCIA[indice];
   const reduzido = animOff || sistemaReduz;
@@ -258,11 +282,37 @@ export function MotorPalco({
     <PalcoCtx.Provider value={{ reduzido }}>
       <MotionConfig reducedMotion={reduzido ? "always" : "user"}>
         <div className="min-h-screen bg-bg text-ink">
+          {celular && emPe && !verAssim && (
+            <div role="dialog" aria-modal="true" aria-labelledby="titulo-girar" className="fixed inset-0 z-[60] flex flex-col items-center justify-center gap-[4vh] bg-bg px-[8vw] text-center">
+              <p aria-hidden className="text-[12vw] leading-none">⟳</p>
+              <h2 id="titulo-girar" className="titulo text-[7vw] leading-tight text-ink">Gire o celular para ver a palestra</h2>
+              <p className="text-[4vw] text-ink-2">Ela foi feita para tela deitada, como a de uma TV ou projetor.</p>
+              <button type="button" onClick={() => setVerAssim(true)} className="rounded-full border-2 border-line-2 px-[6vw] py-[2vh] text-[4vw] font-bold text-ink-2">
+                Ver assim mesmo
+              </button>
+            </div>
+          )}
           <div className="sr-only" aria-live="polite" role="status">
             {anuncio}
           </div>
 
-          <main className="palco-grade">
+          <main
+            className="palco-grade"
+            onTouchStart={(e) => {
+              toqueRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            }}
+            onTouchEnd={(e) => {
+              // Arrastar para o lado passa o slide (celular e tablet).
+              const ini = toqueRef.current;
+              toqueRef.current = null;
+              if (!ini) return;
+              const dx = e.changedTouches[0].clientX - ini.x;
+              const dy = e.changedTouches[0].clientY - ini.y;
+              if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+              if (dx < 0) irPara(indice + 1, 1);
+              else irPara(indice - 1, -1);
+            }}
+          >
             <h1 className="sr-only">Por inteiro — Novembro Azul, palestra com Marcelo Schiavo. Conteúdo educativo. CVV 188, 24 horas.</h1>
             {/* Sem AnimatePresence "wait": com setas apertadas depressa, a saída
                 pendente travava a navegação. Cada slide só anima a entrada. */}
@@ -291,6 +341,13 @@ export function MotorPalco({
             className="fixed left-0 top-0 h-1.5 bg-acento transition-all"
             style={{ width: `${((indice + 1) / SEQUENCIA.length) * 100}%` }}
           />
+
+          {celular && (
+            <div className="fixed bottom-[9vh] right-[1.5vw] z-20 flex gap-4">
+              <button type="button" aria-label="Slide anterior" onClick={() => irPara(indice - 1, -1)} disabled={indice === 0} className="flex h-28 w-28 items-center justify-center rounded-full border-2 border-line-2 bg-surface/80 text-6xl font-bold text-ink-2 backdrop-blur disabled:opacity-30">‹</button>
+              <button type="button" aria-label="Próximo slide" onClick={() => irPara(indice + 1, 1)} disabled={indice === SEQUENCIA.length - 1} className="flex h-28 w-28 items-center justify-center rounded-full bg-acento text-6xl font-bold text-sobre-acento disabled:opacity-30">›</button>
+            </div>
+          )}
 
           <button
             onClick={() => setAjudaOn(true)}
