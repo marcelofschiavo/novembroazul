@@ -39,7 +39,7 @@ export default function PaginaAguardando() {
             Por inteiro.
           </motion.h1>
           <motion.p variants={degrau} className="text-palco-corpo font-semibold leading-snug text-ink-2">
-            Enquanto a turma chega: você sabe quando vence a revisão do seu carro?
+            Enquanto a turma chega: você sabe quando é a próxima revisão ou troca de óleo do seu carro?
           </motion.p>
           {restante !== null && restante > 0 && (
             <motion.p variants={degrau} className="dados text-palco-titulo font-bold text-campanha">

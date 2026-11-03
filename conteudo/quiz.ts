@@ -36,7 +36,7 @@ export const QUIZ: PerguntaQuiz[] = [
     pergunta: "No homem, a depressão muitas vezes aparece como…",
     opcoes: ["Só tristeza e choro", "Irritação, álcool a mais e comportamento de risco", "Ela quase não acontece em homens"],
     certa: 1,
-    explicacao: "Contando esses sinais \"disfarçados\", a diferença de depressão entre homens e mulheres desaparece.",
+    explicacao: "Quando a pesquisa conta também esses sinais \"disfarçados\", há tantos homens com depressão quanto mulheres. Ela existe — só passa despercebida.",
     fonteIds: ["martin2013"],
   },
   {

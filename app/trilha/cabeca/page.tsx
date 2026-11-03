@@ -7,7 +7,7 @@ export default function PaginaCabeca() {
       id="cabeca"
       titulo="Cabeça também é saúde"
       ideia="O motorista também precisa de revisão. No homem, a depressão muitas vezes não aparece como tristeza — aparece como irritação, álcool e risco."
-      porque="Quando se contam os sinais mais comuns nos homens (raiva, álcool, risco), a diferença de depressão entre homens e mulheres desaparece: muito homem sofre sem diagnóstico. No Brasil, 10,2% dos adultos referiram depressão em 2019, e os homens morrem por suicídio cerca de quatro vezes mais que as mulheres. Pedir ajuda cedo é manutenção."
+      porque="Quando a pesquisa conta também os sinais mais comuns nos homens (raiva, álcool, risco), há tantos homens com depressão quanto mulheres: muito homem sofre sem diagnóstico. No Brasil, 10,2% dos adultos referiram depressão em 2019, e os homens morrem por suicídio cerca de quatro vezes mais que as mulheres. Pedir ajuda cedo é manutenção."
       fontes={["martin2013", "brito2022", "palma2021", "wong2017", "holtlunstad2010", "oms2025", "cvv"]}
     >
       <section className="grid gap-4 sm:grid-cols-2">
