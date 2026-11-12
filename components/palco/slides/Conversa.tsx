@@ -7,8 +7,9 @@ import { HeartPulse, Building2, Stethoscope, HandHeart, Play } from "lucide-reac
 import { degrau, escada, escreve, pulsa, ENTRADA, SUAVE } from "@/lib/motion";
 import { Titulo, Destaque, IconeGrande, ICONES } from "./comum";
 import { Cena } from "./Historia";
-import { PENSAMENTOS } from "@/conteudo/saude";
-import { EVENTO, PALESTRANTE } from "@/conteudo/palestrante";
+import { PALESTRANTE } from "@/conteudo/palestrante";
+import type { Lugar } from "@/conteudo/kit";
+import { useKit } from "../PalcoContext";
 import type { Slide } from "@/conteudo/blocos";
 
 export function Frase({ slide }: { slide: Slide }) {
@@ -131,10 +132,11 @@ export function Passos({ slide }: { slide: Slide }) {
 
 /** Pensamento automático riscado → resposta. Os quatro primeiros pares da lista. */
 export function Pensamentos({ slide }: { slide: Slide }) {
-  const pares = PENSAMENTOS.slice(0, 4);
+  const { ui, pensamentos } = useKit();
+  const pares = pensamentos.slice(0, 4);
   return (
     <div className="flex w-full flex-col gap-[3vmin]">
-      <Titulo sobre="Pensamentos automáticos" titulo={slide.titulo} />
+      <Titulo sobre={ui.pensamentosSobre} titulo={slide.titulo} />
       <ul className="grid grid-cols-2 gap-[2.4vmin]">
         {pares.map((p, i) => {
           const base = 0.5 + i * 1.3;
@@ -224,6 +226,7 @@ export function Caminhos({ slide }: { slide: Slide }) {
 
 /** Exercício com tempo: só começa ao clicar, mostra a contagem. */
 export function Exercicio({ slide }: { slide: Slide }) {
+  const { ui } = useKit();
   const total = slide.duracaoSeg ?? 60;
   const [restante, setRestante] = useState<number | null>(null);
   useEffect(() => {
@@ -234,7 +237,7 @@ export function Exercicio({ slide }: { slide: Slide }) {
   return (
     <div className="grid w-full grid-cols-[1fr_auto] items-center gap-[5vmin]">
       <div className="flex min-w-0 flex-col gap-[3vmin]">
-        <Titulo sobre="Exercício · 1 minuto" titulo={slide.titulo} />
+        <Titulo sobre={ui.exercicioSobre} titulo={slide.titulo} />
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="text-palco-corpo font-semibold leading-snug text-ink">
           {slide.instrucao}
         </motion.p>
@@ -250,11 +253,11 @@ export function Exercicio({ slide }: { slide: Slide }) {
         </motion.div>
         {restante === null ? (
           <button type="button" onClick={() => setRestante(total)} className="flex items-center gap-2 rounded-full bg-acento px-[3vmin] py-[1.2vmin] text-palco-nota font-bold text-sobre-acento">
-            <Play aria-hidden className="h-[1em] w-[1em]" /> Começar
+            <Play aria-hidden className="h-[1em] w-[1em]" /> {ui.comecar}
           </button>
         ) : (
           <span className="dados text-palco-nota text-muted" aria-live="polite">
-            {restante > 0 ? "segundos" : "pode abrir os olhos"}
+            {restante > 0 ? ui.segundos : ui.abraOsOlhos}
           </span>
         )}
       </div>
@@ -263,16 +266,18 @@ export function Exercicio({ slide }: { slide: Slide }) {
 }
 
 export function SeEntao({ slide }: { slide: Slide }) {
+  const { ui } = useKit();
+  const [antes, meio, fim] = ui.seEntao;
   return (
     <div className="flex w-full flex-col gap-[3.6vmin]">
-      <Titulo sobre="De volta à oficina" titulo={slide.titulo} />
+      <Titulo sobre={ui.seEntaoSobre} titulo={slide.titulo} />
       <motion.p
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
         className="titulo w-fit rounded-[2.4vmin] border-[3px] border-dashed border-campanha-fill bg-campanha-wash px-[3vmin] py-[2vmin] text-palco-titulo text-ink"
       >
-        Se for <span className="text-campanha">______</span>, então eu <span className="text-campanha">______</span>.
+        {antes}<span className="text-campanha">______</span>{meio}<span className="text-campanha">______</span>{fim}
       </motion.p>
       <motion.ul initial="entra" animate="ativo" variants={escada(0.5, 1.1)} className="flex flex-col gap-[1.4vmin]">
         {slide.exemplos?.map((e) => (
@@ -285,29 +290,28 @@ export function SeEntao({ slide }: { slide: Slide }) {
   );
 }
 
-const LUGARES = [
-  { icone: HeartPulse, titulo: "Plano de saúde", texto: "clínico ou urologista" },
-  { icone: Building2, titulo: "UBS, pelo SUS", texto: "porta de entrada do homem" },
-  { icone: Stethoscope, titulo: "Medicina do trabalho", texto: "o exame periódico" },
-  { icone: HandHeart, titulo: "Programas da empresa", texto: "se houver" },
-];
+const ICONE_LUGAR: Record<Lugar["icone"], typeof HeartPulse> = { plano: HeartPulse, ubs: Building2, trabalho: Stethoscope, empresa: HandHeart };
 
 export function OndeIr({ slide }: { slide: Slide }) {
+  const { ui } = useKit();
   return (
     <div className="flex w-full flex-col gap-[3.4vmin]">
       <Titulo titulo={slide.titulo} />
       <motion.ul initial="entra" animate="ativo" variants={escada(0.15, 0.3)} className="grid grid-cols-4 gap-[2vmin]">
-        {LUGARES.map(({ icone: Icone, titulo, texto }) => (
+        {ui.lugares.map(({ icone, titulo, texto }) => {
+          const Icone = ICONE_LUGAR[icone];
+          return (
           <motion.li key={titulo} variants={degrau} className="flex flex-col gap-[1.4vmin] rounded-[2.4vmin] cartao p-[2.4vmin]">
             <Icone aria-hidden className="h-[8vmin] w-[8vmin] text-campanha" strokeWidth={2} />
             <span className="titulo text-palco-texto leading-tight text-ink">{titulo}</span>
             <span className="text-palco-nota font-semibold leading-snug text-ink-2">{texto}</span>
           </motion.li>
-        ))}
+          );
+        })}
       </motion.ul>
       <Destaque texto={slide.destaque} atraso={1.1} />
       <p className="text-palco-nota font-semibold text-ink-2">
-        Para conversar agora: <strong className="text-campanha">CVV 188</strong>, 24 horas, gratuito.
+        {ui.ajudaAgora.antes}<strong className="text-campanha">{ui.ajudaAgora.forte}</strong>{ui.ajudaAgora.depois}
       </p>
     </div>
   );
@@ -315,7 +319,8 @@ export function OndeIr({ slide }: { slide: Slide }) {
 
 /** Fecho com QR da trilha. O QR é gerado localmente (funciona offline). */
 export function Fecho({ slide }: { slide: Slide }) {
-  const url = slide.url ?? `${EVENTO.url}/trilha`;
+  const { ui, trilhaUrl } = useKit();
+  const url = slide.url ?? trilhaUrl;
   return (
     <div className="grid w-full grid-cols-[1fr_auto] items-center gap-[5vmin]">
       <div className="flex min-w-0 flex-col gap-[2.6vmin]">
@@ -326,17 +331,18 @@ export function Fecho({ slide }: { slide: Slide }) {
           {slide.destaque}
         </motion.p>
       </div>
-      <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8, duration: 0.6, ease: ENTRADA }} className="flex flex-col items-center gap-[1.6vmin]">
+      {url && <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8, duration: 0.6, ease: ENTRADA }} className="flex flex-col items-center gap-[1.6vmin]">
         <motion.div initial="ativo" animate="ativo" variants={pulsa} className="rounded-[2.4vmin] bg-white p-[1.6vmin]">
-          <QRCodeSVG title="QR code para abrir a trilha" value={url} size={512} level="M" bgColor="#FFFFFF" fgColor="#0B1B33" style={{ width: "26vmin", height: "26vmin", display: "block" }} />
+          <QRCodeSVG title={ui.qrTitulo} value={url} size={512} level="M" bgColor="#FFFFFF" fgColor="#0B1B33" style={{ width: "26vmin", height: "26vmin", display: "block" }} />
         </motion.div>
         <p className="dados text-palco-nota font-bold text-campanha [overflow-wrap:anywhere]">{url.replace(/^https?:\/\//, "")}</p>
-      </motion.div>
+      </motion.div>}
     </div>
   );
 }
 
 export function Perguntas({ slide }: { slide: Slide }) {
+  const { registro, trilhaUrl } = useKit();
   return (
     <div className="flex w-full flex-col gap-[3vmin]">
       <motion.h2 initial="entra" animate="ativo" variants={escreve} className="titulo text-palco-mega text-ink">
@@ -344,11 +350,11 @@ export function Perguntas({ slide }: { slide: Slide }) {
       </motion.h2>
       <p className="text-palco-corpo font-semibold text-ink-2">{slide.destaque}</p>
       <div className="mt-[2vmin] flex flex-col gap-[0.6vmin] border-t-2 border-line pt-[2.4vmin]">
-        <p className="text-palco-texto font-bold text-ink">{PALESTRANTE.nome} · {PALESTRANTE.crp}</p>
+        <p className="text-palco-texto font-bold text-ink">{PALESTRANTE.nome} · {registro}</p>
         <p className="text-palco-nota font-semibold text-ink-2">
           {PALESTRANTE.contatos.map((c) => `${c.rede}: ${c.rotulo}`).join("   ·   ")}
         </p>
-        <p className="dados text-palco-nota text-campanha">{EVENTO.url.replace(/^https?:\/\//, "")}/trilha</p>
+        {trilhaUrl && <p className="dados text-palco-nota text-campanha">{trilhaUrl.replace(/^https?:\/\//, "")}</p>}
       </div>
     </div>
   );

@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import { degrau, escada } from "@/lib/motion";
-import { PERSONAGENS, type IdPersonagem } from "@/conteudo/historia";
+import type { IdPersonagem } from "@/conteudo/historia";
+import { useKit } from "../PalcoContext";
 import type { Slide } from "@/conteudo/blocos";
 
 
@@ -22,15 +23,11 @@ export function Cena({ src, alt }: { src: string; alt?: string }) {
   );
 }
 
-const ETAPAS = [
-  { id: "inicio", rotulo: "Início" },
-  { id: "meio", rotulo: "Meio" },
-  { id: "fim", rotulo: "Fim" },
-] as const;
+const ETAPAS = ["inicio", "meio", "fim"] as const;
 
 /** Avatar do personagem: inicial num círculo + nome escrito (a cor nunca é o único sinal). */
 export function Avatar({ quem, tamanho = "10vmin" }: { quem: IdPersonagem; tamanho?: string }) {
-  const p = PERSONAGENS[quem];
+  const p = useKit().personagens[quem];
   const estilo: Record<IdPersonagem, string> = {
     davi: "bg-campanha-fill text-white",
     roberto: "bg-ink text-bg",
@@ -53,24 +50,25 @@ export function Avatar({ quem, tamanho = "10vmin" }: { quem: IdPersonagem; taman
  * fim ficam marcados por texto e posição.
  */
 export function Historia({ slide }: { slide: Slide }) {
+  const { ui, personagens } = useKit();
   const h = slide.historia!;
-  const atual = ETAPAS.findIndex((e) => e.id === h.capitulo);
+  const atual = ETAPAS.indexOf(h.capitulo);
   const texto = slide.imagem ? "max-w-[44vw]" : "max-w-[82vw]";
   return (
     <div className={`grid w-full items-center gap-[4vmin] ${slide.imagem ? "grid-cols-[1fr_auto]" : "grid-cols-1"}`}>
     <div className="flex min-w-0 flex-col gap-[3vmin]">
       <motion.div initial="entra" animate="ativo" variants={degrau} className="flex flex-wrap items-center gap-x-[2.4vmin] gap-y-[1vmin]">
-        <span className="dados text-palco-rodape font-bold uppercase tracking-[0.14em] text-muted">A história do Davi</span>
-        <ol className="flex items-center gap-[1.2vmin]" aria-label="Etapa da história">
+        <span className="dados text-palco-rodape font-bold uppercase tracking-[0.14em] text-muted">{ui.historiaDe}</span>
+        <ol className="flex items-center gap-[1.2vmin]" aria-label={ui.etapaHistoria}>
           {ETAPAS.map((e, i) => (
             <li
-              key={e.id}
+              key={e}
               aria-current={i === atual ? "step" : undefined}
               className={`dados rounded-full border-[3px] px-[1.4vmin] py-[0.3vmin] text-palco-rodape font-bold uppercase tracking-wide ${
                 i === atual ? "border-campanha-fill bg-campanha-fill text-white" : "border-line-2 text-muted"
               }`}
             >
-              {e.rotulo}
+              {ui.etapas[i]}
             </li>
           ))}
         </ol>
@@ -93,7 +91,7 @@ export function Historia({ slide }: { slide: Slide }) {
               <Avatar quem={f.quem} />
               <div className="flex flex-col">
                 <span className="dados text-palco-rodape font-bold uppercase tracking-wide text-muted">
-                  {PERSONAGENS[f.quem].nome} · {PERSONAGENS[f.quem].descricao}
+                  {personagens[f.quem].nome} · {personagens[f.quem].descricao}
                 </span>
                 <blockquote className="cartao rounded-tl-none px-[2.4vmin] py-[1.4vmin] text-palco-corpo font-bold leading-tight text-ink">
                   “{f.texto}”
@@ -111,7 +109,7 @@ export function Historia({ slide }: { slide: Slide }) {
       )}
 
       {h.capitulo === "inicio" && slide.id === "1.5" && (
-        <p className="dados text-palco-rodape text-muted">Personagens fictícios, compostos de situações comuns. Ilustrações geradas por IA.</p>
+        <p className="dados text-palco-rodape text-muted">{ui.aviso15}</p>
       )}
     </div>
     {slide.imagem && <Cena src={slide.imagem} alt={slide.alt} />}

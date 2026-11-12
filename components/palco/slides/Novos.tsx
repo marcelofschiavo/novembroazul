@@ -18,7 +18,7 @@ import {
 import { degrau, escada } from "@/lib/motion";
 import { Titulo, Destaque } from "./comum";
 import { Ponto } from "./Revisao";
-import { LUZES_NIVEIS } from "@/conteudo/saude";
+import { useKit } from "../PalcoContext";
 import type { Slide } from "@/conteudo/blocos";
 
 /* Slides novos de nov/2026: PSA + toque, luzes por cor, couraça, quem conta com você. */
@@ -29,22 +29,23 @@ import type { Slide } from "@/conteudo/blocos";
  * entre SBU e Ministério da Saúde vai no destaque.
  */
 export function PsaToque({ slide }: { slide: Slide }) {
+  const { psa } = useKit().ui;
   const grupos = [
-    { rotulo: "Sem o exame", mortes: 12, evitadas: 0 },
-    { rotulo: "Com o exame", mortes: 10, evitadas: 2 },
+    { rotulo: psa.sem, mortes: 12, evitadas: 0 },
+    { rotulo: psa.com, mortes: 10, evitadas: 2 },
   ];
-  const riscos = ["Alarme falso e biópsia à toa", "Tratar câncer que não faria mal", "Efeitos no xixi e na ereção"];
+  const riscos = psa.riscos;
   return (
     <div className="flex w-full flex-col gap-[2.6vmin]">
       <Titulo sobre={slide.sobre} titulo={slide.titulo} />
       <div className="grid grid-cols-[1.45fr_1fr_1fr] gap-[2.4vmin]">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="cartao-aceso flex flex-col gap-[1.2vmin] rounded-[2.4vmin] p-[2.2vmin]">
-          <span className="titulo text-palco-corpo text-campanha">O que o PSA ajuda</span>
-          <span className="text-palco-nota font-semibold leading-snug text-ink-2">Mortes por câncer de próstata, em 1.000 homens:</span>
+          <span className="titulo text-palco-corpo text-campanha">{psa.titulo}</span>
+          <span className="text-palco-nota font-semibold leading-snug text-ink-2">{psa.legenda}</span>
           {grupos.map((g) => (
             <div key={g.rotulo} className="grid grid-cols-[auto_1fr_auto] items-center gap-[1.4vmin]">
               <span className="text-palco-nota font-bold text-ink">{g.rotulo}</span>
-              <span className="flex gap-[0.4vmin]" role="img" aria-label={`${g.rotulo}: ${g.mortes} em 1.000`}>
+              <span className="flex gap-[0.4vmin]" role="img" aria-label={`${g.rotulo}: ${g.mortes} ${psa.emMil}`}>
                 {Array.from({ length: g.mortes }, (_, i) => <Ponto key={i} pequeno />)}
                 {Array.from({ length: g.evitadas }, (_, i) => <Ponto key={`e${i}`} evitada pequeno />)}
               </span>
@@ -52,13 +53,13 @@ export function PsaToque({ slide }: { slide: Slide }) {
             </div>
           ))}
           <p className="flex items-center gap-[1.2vmin] text-palco-nota font-bold leading-snug text-ink">
-            <Ponto evitada pequeno /> 2 mortes a menos em 1.000
+            <Ponto evitada pequeno /> {psa.menos}
           </p>
-          <p className="dados text-palco-rodape text-muted">Mortes por qualquer causa: sem diferença.</p>
+          <p className="dados text-palco-rodape text-muted">{psa.geral}</p>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="cartao cartao-suave flex flex-col gap-[1.4vmin] rounded-[2.4vmin] p-[2.2vmin]">
-          <span className="titulo text-palco-corpo text-ink-2">O outro lado</span>
+          <span className="titulo text-palco-corpo text-ink-2">{psa.outroLado}</span>
           <ul className="flex flex-col gap-[1.4vmin]">
             {riscos.map((r) => (
               <li key={r} className="flex items-baseline gap-[1.2vmin] text-palco-nota font-semibold leading-snug text-ink">
@@ -70,7 +71,7 @@ export function PsaToque({ slide }: { slide: Slide }) {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.3 }} className="cartao flex flex-col gap-[1.4vmin] rounded-[2.4vmin] p-[2.2vmin]">
-          <span className="titulo text-palco-corpo text-ink">E o toque retal?</span>
+          <span className="titulo text-palco-corpo text-ink">{psa.toque}</span>
           <ul className="flex flex-col gap-[1.4vmin]">
             {slide.itens?.map((it) => (
               <li key={it} className="flex items-baseline gap-[1.2vmin] text-palco-nota font-semibold leading-snug text-ink">
@@ -92,8 +93,9 @@ const ICONE_SINAL: Record<string, LucideIcon> = { coracao: HeartPulse, vento: Wi
 
 /** Barrinhas de intensidade (3, 2 ou 1 cheias): a cor nunca é o único sinal. */
 function Intensidade({ n, cor }: { n: number; cor: string }) {
+  const { ui } = useKit();
   return (
-    <span role="img" aria-label={`intensidade ${n} de 3`} className="flex items-end gap-[0.4vmin]">
+    <span role="img" aria-label={`${ui.intensidade} ${n}/3`} className="flex items-end gap-[0.4vmin]">
       {[1, 2, 3].map((i) => (
         <span
           key={i}
@@ -111,11 +113,12 @@ function Intensidade({ n, cor }: { n: number; cor: string }) {
  * barras de intensidade e os sinais com ícone.
  */
 export function LuzesNivel({ slide }: { slide: Slide }) {
+  const { luzes } = useKit();
   return (
     <div className="flex w-full flex-col gap-[2.2vmin]">
       <Titulo sobre={slide.sobre} titulo={slide.titulo} />
       <motion.ul initial="entra" animate="ativo" variants={escada(0.45, 0.4)} className="flex flex-col gap-[1.2vmin]">
-        {LUZES_NIVEIS.map((nivel) => {
+        {luzes.map((nivel) => {
           const cor = COR_LUZ[nivel.id];
           return (
             <motion.li
@@ -166,6 +169,7 @@ export function LuzesNivel({ slide }: { slide: Slide }) {
  * aprende cedo); à direita, o que fica do lado de dentro e um número.
  */
 export function Couraca({ slide }: { slide: Slide }) {
+  const { ui } = useKit();
   const dentro = slide.colunas?.[0];
   const num = slide.numeros?.[0];
   return (
@@ -175,7 +179,7 @@ export function Couraca({ slide }: { slide: Slide }) {
         <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3, duration: 0.55 }} className="flex flex-col gap-[1.4vmin] rounded-[2.4vmin] bg-ink p-[2.4vmin] text-bg">
           <span className="flex items-center gap-[1.4vmin]">
             <Shield aria-hidden className="h-[5vmin] w-[5vmin]" strokeWidth={2.2} />
-            <span className="dados text-palco-rodape font-bold uppercase tracking-[0.14em]">O que a couraça diz</span>
+            <span className="dados text-palco-rodape font-bold uppercase tracking-[0.14em]">{ui.couracaDiz}</span>
           </span>
           <motion.ul initial="entra" animate="ativo" variants={escada(0.25, 0.6)} className="flex flex-col gap-[1vmin]">
             {slide.itens?.map((f) => (
@@ -217,7 +221,6 @@ export function Couraca({ slide }: { slide: Slide }) {
 }
 
 const ICONE_CIRCULO: LucideIcon[] = [House, Briefcase, Users];
-const ROTULO_ANEL = ["Casa", "Trabalho", "Amigos"];
 
 /**
  * Quem conta com você: círculos em volta do "você" (casa, trabalho, amigos)
@@ -225,9 +228,10 @@ const ROTULO_ANEL = ["Casa", "Trabalho", "Amigos"];
  * "cuidar de você também é cuidar deles".
  */
 export function QuemConta({ slide }: { slide: Slide }) {
+  const { ui } = useKit();
   const circulos = slide.passos ?? [];
   // De fora para dentro: amigos, trabalho, casa — e o "você" no centro.
-  const aneis = circulos.map((c, i) => ({ rotulo: ROTULO_ANEL[i] ?? c.titulo, Icone: ICONE_CIRCULO[i] ?? Users })).reverse();
+  const aneis = circulos.map((c, i) => ({ rotulo: ui.aneis[i] ?? c.titulo, Icone: ICONE_CIRCULO[i] ?? Users })).reverse();
   const tamanhos = [100, 76, 52];
   return (
     <div className="grid w-full grid-cols-[1fr_auto] items-center gap-[5vmin]">
@@ -282,7 +286,7 @@ export function QuemConta({ slide }: { slide: Slide }) {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="titulo absolute inset-[36%] flex items-center justify-center rounded-full bg-acento text-palco-corpo text-sobre-acento shadow-[0_0_4vmin_var(--campanha-fill)]"
         >
-          Você
+          {ui.voce}
         </motion.div>
       </div>
     </div>

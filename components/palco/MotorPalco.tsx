@@ -6,6 +6,7 @@ import { Settings } from "lucide-react";
 import { slide as slideVariant, semMovimento } from "@/lib/motion";
 import { SEQUENCIA_PALCO, CHAVE_POSICAO, lerPosicaoSalva, salvarPosicao, indiceDoSlide } from "@/lib/palco";
 import type { SlideNaSequencia } from "@/conteudo/blocos";
+import { KIT_PT, type KitPalco } from "@/conteudo/kit";
 import { Slide } from "./Slide";
 import { Rodape } from "./Rodape";
 import { NavBlocos } from "./NavBlocos";
@@ -59,7 +60,9 @@ const CHAVE_CONFIG = "na26:palco:config";
 export function MotorPalco({
   sequencia: SEQUENCIA = SEQUENCIA_PALCO,
   chavePosicao = CHAVE_POSICAO,
-}: { sequencia?: SlideNaSequencia[]; chavePosicao?: string } = {}) {
+  kit = KIT_PT,
+}: { sequencia?: SlideNaSequencia[]; chavePosicao?: string; kit?: KitPalco } = {}) {
+  const ui = kit.ui;
   // Começa em 0 e só restaura a posição salva depois de montar: o servidor não
   // tem localStorage, e ler na primeira renderização causa erro de hidratação.
   const [indice, setIndice] = useState(0);
@@ -282,19 +285,19 @@ export function MotorPalco({
 
   if (!montado) return <div className="min-h-screen bg-bg" />;
 
-  const anuncio = `Slide ${indice + 1} de ${SEQUENCIA.length}${atual.slide.titulo ? `: ${atual.slide.titulo}` : ""}`;
+  const anuncio = `${ui.slide} ${indice + 1} ${ui.de} ${SEQUENCIA.length}${atual.slide.titulo ? `: ${atual.slide.titulo}` : ""}`;
 
   return (
-    <PalcoCtx.Provider value={{ reduzido, fontesAbertas }}>
+    <PalcoCtx.Provider value={{ reduzido, fontesAbertas, kit }}>
       <MotionConfig reducedMotion={reduzido ? "always" : "user"}>
         <div className="min-h-screen bg-bg text-ink">
           {celular && emPe && !verAssim && (
             <div role="dialog" aria-modal="true" aria-labelledby="titulo-girar" className="fixed inset-0 z-[60] flex flex-col items-center justify-center gap-[4vh] bg-bg px-[8vw] text-center">
               <p aria-hidden className="text-[12vw] leading-none">⟳</p>
-              <h2 id="titulo-girar" className="titulo text-[7vw] leading-tight text-ink">Gire o celular para ver a palestra</h2>
-              <p className="text-[4vw] text-ink-2">Ela foi feita para tela deitada, como a de uma TV ou projetor.</p>
+              <h2 id="titulo-girar" className="titulo text-[7vw] leading-tight text-ink">{ui.gireTitulo}</h2>
+              <p className="text-[4vw] text-ink-2">{ui.gireTexto}</p>
               <button type="button" onClick={() => setVerAssim(true)} className="rounded-full border-2 border-line-2 px-[6vw] py-[2vh] text-[4vw] font-bold text-ink-2">
-                Ver assim mesmo
+                {ui.gireBotao}
               </button>
             </div>
           )}
@@ -303,6 +306,7 @@ export function MotorPalco({
           </div>
 
           <main
+            lang={kit.lingua === "it" ? "it" : undefined}
             className="palco-grade"
             onTouchStart={(e) => {
               toqueRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
@@ -319,7 +323,7 @@ export function MotorPalco({
               else irPara(indice - 1, -1);
             }}
           >
-            <h1 className="sr-only">Por inteiro — Novembro Azul, palestra com Marcelo Schiavo. Conteúdo educativo. CVV 188, 24 horas.</h1>
+            <h1 className="sr-only">{ui.h1}</h1>
             {/* Sem AnimatePresence "wait": com setas apertadas depressa, a saída
                 pendente travava a navegação. Cada slide só anima a entrada. */}
             <motion.div

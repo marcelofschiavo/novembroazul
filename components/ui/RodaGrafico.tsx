@@ -15,6 +15,8 @@ export function RodaGrafico({
   tamanho = "100%",
   animar = true,
   exemplo = [8, 4, 6, 3, 7, 5, 6, 4],
+  titulo = "Roda da Saúde",
+  nomes,
 }: {
   notas?: Record<string, number>;
   comparar?: Record<string, number>;
@@ -22,6 +24,9 @@ export function RodaGrafico({
   tamanho?: string;
   animar?: boolean;
   exemplo?: number[];
+  /** Nome do gráfico e das áreas para leitor de tela (palco em outro idioma). */
+  titulo?: string;
+  nomes?: string[];
 }) {
   const R = 100;
   const ponto = (i: number, v: number) => {
@@ -34,7 +39,7 @@ export function RodaGrafico({
   const vb = rotulos ? "-235 -135 470 270" : "-110 -110 220 220";
 
   return (
-    <svg viewBox={vb} style={{ width: tamanho, height: "auto", overflow: "visible" }} role="img" aria-label={`Roda da Saúde: ${AREAS_RODA.map((a, i) => `${a.nome} ${valores[i]}`).join(", ")}`}>
+    <svg viewBox={vb} style={{ width: tamanho, height: "auto", overflow: "visible" }} role="img" aria-label={`${titulo}: ${AREAS_RODA.map((a, i) => `${nomes?.[i] ?? a.nome} ${valores[i]}`).join(", ")}`}>
       {[2.5, 5, 7.5, 10].map((v) => (
         <polygon key={v} points={anel(v)} fill="none" stroke="var(--line-2)" strokeWidth={v === 10 ? 1.6 : 0.9} />
       ))}

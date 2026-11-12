@@ -3,13 +3,7 @@
 import { motion } from "motion/react";
 import { Titulo, Destaque } from "./comum";
 import type { Slide } from "@/conteudo/blocos";
-
-const MOSTRADORES = [
-  { nome: "Pressão", alvo: "abaixo de 12 por 8", unidade: "mmHg" },
-  { nome: "Cintura", alvo: "abaixo de 94 cm", unidade: "na altura do umbigo" },
-  { nome: "Glicemia", alvo: "abaixo de 100 em jejum", unidade: "mg/dL" },
-  { nome: "Colesterol", alvo: "a meta depende do seu risco", unidade: "o médico define" },
-];
+import { useKit } from "../PalcoContext";
 
 /** Mostrador de painel de carro, com o ponteiro parado num "?" — você sabe o seu? */
 function Mostrador({ atraso }: { atraso: number }) {
@@ -38,11 +32,12 @@ function Mostrador({ atraso }: { atraso: number }) {
 }
 
 export function Painel({ slide }: { slide: Slide }) {
+  const { ui } = useKit();
   return (
     <div className="flex w-full flex-col gap-[2.8vmin]">
-      <Titulo sobre="O painel" titulo={slide.titulo} />
+      <Titulo sobre={ui.painelSobre} titulo={slide.titulo} />
       <div className="grid grid-cols-4 gap-[2.6vmin]">
-        {MOSTRADORES.map((m, i) => (
+        {ui.mostradores.map((m, i) => (
           <motion.div
             key={m.nome}
             initial={{ opacity: 0, y: 20 }}
@@ -59,7 +54,7 @@ export function Painel({ slide }: { slide: Slide }) {
           </motion.div>
         ))}
       </div>
-      <Destaque texto="Não sabe os seus? É o primeiro item da próxima consulta." atraso={1.6} />
+      <Destaque texto={ui.painelDestaque} atraso={1.6} />
     </div>
   );
 }

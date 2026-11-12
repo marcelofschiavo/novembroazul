@@ -1,6 +1,6 @@
 "use client";
 
-import { BLOCOS } from "@/conteudo/blocos";
+import { useKit } from "./PalcoContext";
 
 /**
  * Barra translúcida no topo: todos os blocos da palestra, com o atual
@@ -8,10 +8,11 @@ import { BLOCOS } from "@/conteudo/blocos";
  * vistos com ✓), nunca só cor.
  */
 export function NavBlocos({ atual }: { atual: number }) {
+  const { blocos } = useKit();
   return (
     <nav aria-label="Blocos da palestra" className="pointer-events-none fixed left-0 right-16 top-[10px] z-10 flex justify-center px-[3vmin]">
       <ol className="flex max-w-full flex-wrap items-center justify-center gap-x-[0.4vmin] gap-y-1 rounded-full border border-line bg-surface/70 px-[0.8vmin] py-[0.5vmin] shadow-sm backdrop-blur-md">
-        {BLOCOS.map((b) => {
+        {blocos.map((b) => {
           const ativo = b.numero === atual;
           const feito = b.numero < atual;
           return (

@@ -1,7 +1,7 @@
 "use client";
 
 import type { Slide as TipoSlide } from "@/conteudo/blocos";
-import { mitoPorId } from "@/conteudo/saude";
+import { useKit } from "./PalcoContext";
 import { Fonte } from "./Fonte";
 import { Capa, Palestrante, Pergunta } from "./slides/Abertura";
 import { Numeros } from "./slides/Numeros";
@@ -12,6 +12,7 @@ import { PsaToque, LuzesNivel, Couraca, QuemConta } from "./slides/Novos";
 import { Frase, DuasColunas, Lista, Passos, Pensamentos, Reescrita, Caminhos, Exercicio, SeEntao, OndeIr, Fecho, Perguntas } from "./slides/Conversa";
 
 function Miolo({ slide }: { slide: TipoSlide }) {
+  const { mitos } = useKit();
   switch (slide.tipo) {
     case "capa":
       return <Capa slide={slide} />;
@@ -31,7 +32,7 @@ function Miolo({ slide }: { slide: TipoSlide }) {
       return <RodaSlide slide={slide} />;
     case "mito":
     case "mitoRevelado": {
-      const mito = slide.mitoId ? mitoPorId(slide.mitoId) : undefined;
+      const mito = mitos.find((m) => m.id === slide.mitoId);
       return mito ? <CartaMito mito={mito} revelado={slide.tipo === "mitoRevelado"} /> : null;
     }
     case "quilometragem":

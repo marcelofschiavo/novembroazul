@@ -8,14 +8,16 @@ import { escreve, degrau, escada } from "@/lib/motion";
 import { PALESTRANTE } from "@/conteudo/palestrante";
 import { RodaGrafico } from "@/components/ui/RodaGrafico";
 import type { Slide } from "@/conteudo/blocos";
+import { useKit } from "../PalcoContext";
 
 /** Capa: o título e a roda torta que vai voltar ao longo da palestra. */
 export function Capa({ slide }: { slide: Slide }) {
+  const { ui, areasRoda } = useKit();
   return (
     <div className="grid w-full grid-cols-[1fr_auto] items-center gap-[5vmin]">
       <div className="flex min-w-0 flex-col gap-[3vmin]">
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="pilula dados w-fit whitespace-nowrap text-palco-nota font-semibold uppercase tracking-[0.18em] text-campanha">
-          Novembro Azul · saúde do homem
+          {ui.campanhaPilula}
         </motion.p>
         <motion.h2 initial="entra" animate="ativo" variants={escreve} className="titulo text-[length:calc(clamp(80px,11vw,190px)*var(--escala-texto,1))] leading-[0.92] tracking-[-0.03em] text-ink">
           {slide.titulo}
@@ -29,7 +31,7 @@ export function Capa({ slide }: { slide: Slide }) {
       <motion.div initial={{ opacity: 0, rotate: -12 }} animate={{ opacity: 1, rotate: 0 }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="relative" style={{ width: "min(40vw, 62vh)" }}>
         <div aria-hidden className="absolute inset-[6%] rounded-full bg-campanha-fill/25 blur-[6vmin]" />
         <div className="relative">
-          <RodaGrafico rotulos={false} />
+          <RodaGrafico rotulos={false} titulo={ui.rodaAria} nomes={areasRoda.map((a) => a.nome)} />
         </div>
       </motion.div>
     </div>
@@ -37,6 +39,7 @@ export function Capa({ slide }: { slide: Slide }) {
 }
 
 export function Palestrante() {
+  const { ui, bioCurta } = useKit();
   return (
     <div className="grid w-full grid-cols-[1fr_auto] items-center gap-[6vmin]">
       <div className="flex min-w-0 flex-col gap-[3vmin]">
@@ -44,7 +47,7 @@ export function Palestrante() {
           {PALESTRANTE.nome}
         </motion.h2>
         <motion.ul initial="entra" animate="ativo" variants={escada(0.12, 0.3)} className="flex flex-col gap-[1.2vmin]">
-          {PALESTRANTE.bioCurta.map((linha) => (
+          {bioCurta.map((linha) => (
             <motion.li key={linha} variants={degrau} className="flex items-baseline gap-[1.6vmin] text-palco-nota font-semibold leading-snug text-ink">
               <span aria-hidden className="text-campanha">▸</span>
               {linha}
@@ -59,7 +62,7 @@ export function Palestrante() {
         className="relative overflow-hidden rounded-full border-[0.8vmin] border-campanha-fill"
         style={{ width: "min(36vw, 52vh)", height: "min(36vw, 52vh)" }}
       >
-        <Image src={PALESTRANTE.foto} alt={`Foto de ${PALESTRANTE.nome}`} fill className="object-cover" sizes="36vw" priority unoptimized />
+        <Image src={PALESTRANTE.foto} alt={`${ui.fotoDe} ${PALESTRANTE.nome}`} fill className="object-cover" sizes="36vw" priority unoptimized />
       </motion.div>
     </div>
   );
@@ -67,6 +70,7 @@ export function Palestrante() {
 
 /** Pergunta de mão levantada; a segunda pergunta entra depois de alguns segundos (ou logo, com `segundaJa`). */
 export function Pergunta({ slide }: { slide: Slide }) {
+  const { ui } = useKit();
   const [segunda, setSegunda] = useState(false);
   useEffect(() => {
     const t = setTimeout(() => setSegunda(true), slide.segundaJa ? 700 : 4500);
@@ -75,7 +79,7 @@ export function Pergunta({ slide }: { slide: Slide }) {
   return (
     <div className="flex w-full flex-col gap-[5vmin]">
       <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="dados flex items-center gap-[1.4vmin] text-palco-nota font-semibold uppercase tracking-[0.16em] text-campanha">
-        <Hand aria-hidden className="h-[1.2em] w-[1.2em]" strokeWidth={2.2} /> levante a mão
+        <Hand aria-hidden className="h-[1.2em] w-[1.2em]" strokeWidth={2.2} /> {ui.levanteMao}
       </motion.p>
       <motion.h2 initial="entra" animate="ativo" variants={escreve} className="titulo max-w-[80vw] text-palco-titulo text-ink">
         {slide.titulo}

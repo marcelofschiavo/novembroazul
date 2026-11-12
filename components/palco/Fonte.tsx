@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { BookOpen } from "lucide-react";
 import { degrau } from "@/lib/motion";
-import { fontesCurtas } from "@/conteudo/referencias";
 import { usePalco } from "./PalcoContext";
 
 /**
@@ -13,7 +12,8 @@ import { usePalco } from "./PalcoContext";
  * completa. Na trilha, as referências aparecem por extenso.
  */
 export function Fonte({ ids, atraso }: { ids?: string[]; atraso?: boolean }) {
-  const { fontesAbertas } = usePalco();
+  const { fontesAbertas, kit } = usePalco();
+  const { fontesCurtas, ui } = kit;
   const [aberta, setAberta] = useState(false);
   if (!ids?.length) return null;
   const mostra = aberta || fontesAbertas;
@@ -26,7 +26,7 @@ export function Fonte({ ids, atraso }: { ids?: string[]; atraso?: boolean }) {
         className="dados flex shrink-0 items-center gap-[0.6vmin] rounded-full border border-line px-[1vmin] py-[0.2vmin] text-[length:calc(clamp(12px,0.85vw,17px)*var(--escala-texto,1))] text-muted hover:text-ink-2 focus-visible:text-ink-2"
       >
         <BookOpen aria-hidden className="h-[1.1em] w-[1.1em]" strokeWidth={2.2} />
-        {ids.length > 1 ? `fontes (${ids.length})` : "fonte"}
+        {ids.length > 1 ? `${ui.fontes} (${ids.length})` : ui.fonte}
       </button>
       {mostra ? (
         <p className="dados text-[length:calc(clamp(12px,0.85vw,17px)*var(--escala-texto,1))] leading-snug text-muted">{fontesCurtas(ids)}</p>
