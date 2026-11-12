@@ -1,12 +1,11 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Droplet, MoonStar, HeartPulse, BedDouble, Zap, CloudRain, type LucideIcon } from "lucide-react";
 import { degrau, escada, viraCarta } from "@/lib/motion";
 import { Titulo, Destaque } from "./comum";
 import { RodaGrafico } from "@/components/ui/RodaGrafico";
-import { AREAS_RODA, LUZES, type Mito } from "@/conteudo/saude";
-import { fontesCurtas } from "@/conteudo/referencias";
+import { AREAS_RODA, type Mito } from "@/conteudo/saude";
+import { Fonte } from "../Fonte";
 import type { Slide } from "@/conteudo/blocos";
 
 /** Roda ao vivo: as 8 áreas em volta e a roda torta de exemplo no meio. */
@@ -58,7 +57,7 @@ export function CartaMito({ mito, revelado }: { mito: Mito; revelado: boolean })
             </span>
             <p className="max-w-[70vw] text-palco-nota font-semibold italic text-ink-2">“{mito.afirmacao}”</p>
             <p className="max-w-[76vw] text-palco-texto font-medium leading-snug text-ink">{mito.comentario}</p>
-            <p className="dados text-palco-rodape text-muted">fonte: {fontesCurtas(mito.fonteIds)}</p>
+            <Fonte ids={mito.fonteIds} atraso={false} />
           </div>
         </motion.div>
       </div>
@@ -103,90 +102,11 @@ export function Quilometragem({ slide }: { slide: Slide }) {
 }
 
 /** Ponto de um homem: cheio = morreu de câncer de próstata; vazado e tracejado = morte evitada. */
-function Ponto({ evitada }: { evitada?: boolean }) {
+export function Ponto({ evitada, pequeno }: { evitada?: boolean; pequeno?: boolean }) {
   return (
     <span
       aria-hidden
-      className={`inline-block h-[2.6vmin] w-[2.6vmin] shrink-0 rounded-full ${evitada ? "border-[0.5vmin] border-dashed border-ok" : "bg-alerta"}`}
+      className={`inline-block shrink-0 rounded-full ${pequeno ? "h-[2vmin] w-[2vmin]" : "h-[2.6vmin] w-[2.6vmin]"} ${evitada ? "border-[0.5vmin] border-dashed border-ok" : "bg-alerta"}`}
     />
-  );
-}
-
-/**
- * Caixa de fatos do PSA em formato de balança: de um lado, as mortes por
- * câncer de próstata em 1.000 homens (12 sem o exame, 10 com); do outro, o
- * que o exame pode trazer. Números absolutos, sem porcentagem.
- */
-export function CaixaFatos({ slide }: { slide: Slide }) {
-  const grupos = [
-    { rotulo: "Sem o exame", mortes: 12, evitadas: 0 },
-    { rotulo: "Com o exame", mortes: 10, evitadas: 2 },
-  ];
-  const riscos = [
-    "Alarme falso: PSA alto sem câncer, e biópsia sem precisar",
-    "Achar um câncer que nunca faria mal — e tratar mesmo assim",
-    "Efeitos do tratamento no xixi e na ereção",
-  ];
-  return (
-    <div className="flex w-full flex-col gap-[2.6vmin]">
-      <Titulo sobre="Caixa de fatos · 1.000 homens acompanhados por 16 anos" titulo={slide.titulo} />
-      <div className="grid grid-cols-[1.35fr_1fr] gap-[3vmin]">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="cartao-aceso flex flex-col gap-[1.4vmin] rounded-[2.4vmin] p-[2.2vmin]">
-          <span className="titulo text-palco-corpo text-campanha">O que o exame ajuda</span>
-          <span className="text-palco-nota font-semibold text-ink-2">Morreram de câncer de próstata, em cada 1.000:</span>
-          {grupos.map((g) => (
-            <div key={g.rotulo} className="grid grid-cols-[auto_1fr_auto] items-center gap-[2vmin]">
-              <span className="text-palco-nota font-bold text-ink">{g.rotulo}</span>
-              <span className="flex gap-[0.5vmin]" role="img" aria-label={`${g.rotulo}: ${g.mortes} em 1.000`}>
-                {Array.from({ length: g.mortes }, (_, i) => <Ponto key={i} />)}
-                {Array.from({ length: g.evitadas }, (_, i) => <Ponto key={`e${i}`} evitada />)}
-              </span>
-              <span className="titulo text-palco-corpo text-ink">{g.mortes}</span>
-            </div>
-          ))}
-          <p className="flex items-center gap-[1.2vmin] text-palco-nota font-bold text-ink">
-            <Ponto evitada /> = 2 mortes a menos em cada 1.000 homens
-          </p>
-          <p className="dados text-palco-rodape text-muted">Mortes por qualquer causa: iguais nos dois grupos.</p>
-        </motion.div>
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="cartao cartao-suave flex flex-col gap-[1.4vmin] rounded-[2.4vmin] p-[2.2vmin]">
-          <span className="titulo text-palco-corpo text-ink-2">O que o exame pode trazer</span>
-          <ul className="flex flex-col gap-[1.4vmin]">
-            {riscos.map((r) => (
-              <li key={r} className="flex items-baseline gap-[1.2vmin] text-palco-nota font-semibold leading-snug text-ink">
-                <span aria-hidden className="text-muted">▸</span>
-                {r}
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-      </div>
-      <Destaque texto={slide.destaque} atraso={1.4} />
-    </div>
-  );
-}
-
-const ICONE_LUZ: Record<string, LucideIcon> = { gota: Droplet, noite: MoonStar, coracao: HeartPulse, lua: BedDouble, raio: Zap, nuvem: CloudRain };
-
-/** Luzes do painel: sinais que pedem consulta antes da revisão. */
-export function Luzes({ slide }: { slide: Slide }) {
-  return (
-    <div className="flex w-full flex-col gap-[3vmin]">
-      <Titulo sobre="Luzes do painel" titulo={slide.titulo} />
-      <motion.ul initial="entra" animate="ativo" variants={escada(0.12, 0.4)} className="grid grid-cols-3 gap-[2vmin]">
-        {LUZES.map((l) => {
-          const Icone = ICONE_LUZ[l.icone];
-          return (
-            <motion.li key={l.id} variants={degrau} className="flex items-center gap-[1.6vmin] rounded-[2vmin] border-2 border-atencao bg-atencao-wash p-[1.5vmin]">
-              <span aria-hidden className="flex h-[6vmin] w-[6vmin] shrink-0 items-center justify-center rounded-full bg-atencao text-bg">
-                <Icone className="h-[4vmin] w-[4vmin]" strokeWidth={2.4} />
-              </span>
-              <span className="text-palco-nota font-semibold leading-snug text-ink">{l.texto}</span>
-            </motion.li>
-          );
-        })}
-      </motion.ul>
-      <Destaque texto={slide.destaque} atraso={1.4} />
-    </div>
   );
 }

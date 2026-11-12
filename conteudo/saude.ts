@@ -190,6 +190,45 @@ export const LUZES = [
   { id: "humor", texto: "Irritação, tristeza ou álcool a mais por mais de 2 semanas", icone: "nuvem" },
 ] as const;
 
+/**
+ * Luzes por intensidade (palco curto): como no painel do carro, a cor diz
+ * quanto tempo dá para esperar. Só os sinais principais. A cor nunca vem
+ * sozinha: nome da luz, ação e barras de intensidade vão junto.
+ */
+export const LUZES_NIVEIS = [
+  {
+    id: "vermelha",
+    nome: "Luz vermelha",
+    acao: "Atendimento já",
+    quando: "pronto-socorro · SAMU 192",
+    intensidade: 3,
+    sinais: [
+      { texto: "Dor no peito", icone: "coracao" },
+      { texto: "Falta de ar súbita", icone: "vento" },
+    ],
+  },
+  {
+    id: "laranja",
+    nome: "Luz laranja",
+    acao: "Consulta logo",
+    quando: "nos próximos dias",
+    intensidade: 2,
+    sinais: [{ texto: "Sangue na urina ou nas fezes", icone: "gota" }],
+  },
+  {
+    id: "amarela",
+    nome: "Luz amarela",
+    acao: "Marque consulta",
+    quando: "nas próximas semanas",
+    intensidade: 1,
+    sinais: [
+      { texto: "Urinar à noite", icone: "noite" },
+      { texto: "Ronco com pausas", icone: "lua" },
+      { texto: "Tristeza ou irritação por 2 semanas", icone: "nuvem" },
+    ],
+  },
+] as const;
+
 /* ---------------- pensamentos automáticos ---------------- */
 
 export const PENSAMENTOS = [

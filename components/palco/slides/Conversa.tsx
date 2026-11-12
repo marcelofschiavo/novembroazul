@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { QRCodeSVG } from "qrcode.react";
 import { HeartPulse, Building2, Stethoscope, HandHeart, Play } from "lucide-react";
 import { degrau, escada, escreve, pulsa, ENTRADA, SUAVE } from "@/lib/motion";
-import { Titulo, Destaque } from "./comum";
+import { Titulo, Destaque, IconeGrande, ICONES } from "./comum";
 import { Cena } from "./Historia";
 import { PENSAMENTOS } from "@/conteudo/saude";
 import { EVENTO, PALESTRANTE } from "@/conteudo/palestrante";
@@ -13,7 +13,8 @@ import type { Slide } from "@/conteudo/blocos";
 
 export function Frase({ slide }: { slide: Slide }) {
   return (
-    <div className="flex w-full flex-col gap-[3.4vmin]">
+    <div className="grid w-full grid-cols-[1fr_auto] items-center gap-[5vmin]">
+    <div className="flex min-w-0 flex-col gap-[3.4vmin]">
       <motion.h2 initial="entra" animate="ativo" variants={escreve} className="titulo max-w-[82vw] text-palco-mega text-ink">
         {slide.titulo}
       </motion.h2>
@@ -28,6 +29,8 @@ export function Frase({ slide }: { slide: Slide }) {
         </motion.p>
       )}
     </div>
+    <IconeGrande nome={slide.icone} />
+    </div>
   );
 }
 
@@ -39,6 +42,7 @@ export function DuasColunas({ slide }: { slide: Slide }) {
       <div className="grid gap-[3vmin]" style={{ gridTemplateColumns: `repeat(${cols.length}, minmax(0, 1fr))` }}>
         {cols.map((c, i) => {
           const aceso = c.tom === "aceso";
+          const Icone = c.icone ? ICONES[c.icone] : undefined;
           return (
             <motion.div
               key={c.titulo}
@@ -47,7 +51,10 @@ export function DuasColunas({ slide }: { slide: Slide }) {
               transition={{ delay: 0.3 + i * 0.4 }}
               className={`flex flex-col gap-[1.2vmin] rounded-[2.4vmin] p-[2.2vmin] ${aceso ? "cartao-aceso" : "cartao cartao-suave"}`}
             >
-              <span className={`titulo text-palco-corpo ${aceso ? "text-campanha" : "text-ink-2"}`}>{c.titulo}</span>
+              <span className={`titulo flex items-center gap-[1.4vmin] text-palco-corpo ${aceso ? "text-campanha" : "text-ink-2"}`}>
+                {Icone && <Icone aria-hidden className="h-[1.1em] w-[1.1em] shrink-0" strokeWidth={2.2} />}
+                {c.titulo}
+              </span>
               <ul className="flex flex-col gap-[0.6vmin]">
                 {c.itens.map((it) => (
                   <li key={it} className="flex items-baseline gap-[1.2vmin] text-palco-nota font-semibold leading-snug text-ink">
@@ -70,12 +77,21 @@ export function Lista({ slide }: { slide: Slide }) {
     <div className="flex w-full flex-col gap-[3.4vmin]">
       <Titulo sobre={slide.sobre} titulo={slide.titulo} />
       <motion.ul initial="entra" animate="ativo" variants={escada(0.35, 0.4)} className="flex flex-col gap-[2vmin]">
-        {slide.itens?.map((it, i) => (
-          <motion.li key={it} variants={degrau} className="flex items-baseline gap-[2vmin] text-palco-corpo font-semibold leading-tight text-ink">
-            <span className="dados text-palco-nota font-bold text-campanha">{String(i + 1).padStart(2, "0")}</span>
-            {it}
-          </motion.li>
-        ))}
+        {slide.itens?.map((it, i) => {
+          const Icone = slide.icones?.[i] ? ICONES[slide.icones[i]] : undefined;
+          return (
+            <motion.li key={it} variants={degrau} className={`flex gap-[2vmin] text-palco-corpo font-semibold leading-tight text-ink ${Icone ? "items-center" : "items-baseline"}`}>
+              {Icone ? (
+                <span aria-hidden className="flex h-[8vmin] w-[8vmin] shrink-0 items-center justify-center rounded-full bg-campanha-wash text-campanha">
+                  <Icone className="h-[4.6vmin] w-[4.6vmin]" strokeWidth={2.2} />
+                </span>
+              ) : (
+                <span className="dados text-palco-nota font-bold text-campanha">{String(i + 1).padStart(2, "0")}</span>
+              )}
+              {it}
+            </motion.li>
+          );
+        })}
       </motion.ul>
     </div>
   );
@@ -201,6 +217,7 @@ export function Caminhos({ slide }: { slide: Slide }) {
           );
         })}
       </div>
+      <Destaque texto={slide.destaque} atraso={2.4} />
     </div>
   );
 }
@@ -269,10 +286,10 @@ export function SeEntao({ slide }: { slide: Slide }) {
 }
 
 const LUGARES = [
-  { icone: HeartPulse, titulo: "Plano de saúde ou convênio", texto: "clínico geral ou urologista" },
-  { icone: Building2, titulo: "UBS, pelo SUS", texto: "a porta de entrada também do homem" },
-  { icone: Stethoscope, titulo: "Medicina do trabalho", texto: "o exame periódico também é chance de conversar" },
-  { icone: HandHeart, titulo: "Programas da empresa", texto: "saúde e apoio psicológico, se houver" },
+  { icone: HeartPulse, titulo: "Plano de saúde", texto: "clínico ou urologista" },
+  { icone: Building2, titulo: "UBS, pelo SUS", texto: "porta de entrada do homem" },
+  { icone: Stethoscope, titulo: "Medicina do trabalho", texto: "o exame periódico" },
+  { icone: HandHeart, titulo: "Programas da empresa", texto: "se houver" },
 ];
 
 export function OndeIr({ slide }: { slide: Slide }) {
@@ -282,9 +299,9 @@ export function OndeIr({ slide }: { slide: Slide }) {
       <motion.ul initial="entra" animate="ativo" variants={escada(0.15, 0.3)} className="grid grid-cols-4 gap-[2vmin]">
         {LUGARES.map(({ icone: Icone, titulo, texto }) => (
           <motion.li key={titulo} variants={degrau} className="flex flex-col gap-[1.4vmin] rounded-[2.4vmin] cartao p-[2.4vmin]">
-            <Icone aria-hidden className="h-[6vmin] w-[6vmin] text-campanha" strokeWidth={2} />
-            <span className="titulo text-palco-nota leading-tight text-ink">{titulo}</span>
-            <span className="text-palco-rodape font-semibold leading-snug text-ink-2">{texto}</span>
+            <Icone aria-hidden className="h-[8vmin] w-[8vmin] text-campanha" strokeWidth={2} />
+            <span className="titulo text-palco-texto leading-tight text-ink">{titulo}</span>
+            <span className="text-palco-nota font-semibold leading-snug text-ink-2">{texto}</span>
           </motion.li>
         ))}
       </motion.ul>

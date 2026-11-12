@@ -180,8 +180,8 @@
   --text-palco-mega:   calc(clamp(56px, 7.1vw, 170px) * var(--escala-texto, 1));
   --text-palco-titulo: calc(clamp(40px, 4.8vw, 120px) * var(--escala-texto, 1));
   --text-palco-corpo:  calc(clamp(34px, 3vw, 60px) * var(--escala-texto, 1));
-  --text-palco-texto:  calc(clamp(28px, 2.4vw, 48px) * var(--escala-texto, 1));
-  --text-palco-nota:   calc(clamp(26px, 1.95vw, 40px) * var(--escala-texto, 1));
+  --text-palco-texto:  calc(clamp(30px, 2.6vw, 52px) * var(--escala-texto, 1));
+  --text-palco-nota:   calc(clamp(28px, 2.2vw, 44px) * var(--escala-texto, 1));
   --text-palco-rodape: calc(clamp(17px, 1.2vw, 23px) * var(--escala-texto, 1));
 }
 
@@ -256,7 +256,7 @@ button:not(:disabled) { cursor: pointer; }
 
 /* Quebra de linha equilibrada no palco: evita palavra solta na última linha. */
 .palco-grade :is(h1, h2, h3, p, li) {
-  text-wrap: balance;
+  text-wrap-style: balance;
 }
 
 /* Fontes alternativas escolhidas nas configurações do palco. */

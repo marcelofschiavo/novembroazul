@@ -271,7 +271,7 @@ export const REFERENCIAS: Referencia[] = [
     curta: "R U OK? e Movember, modelo ALEC",
     completa: "R U OK? (Austrália) e Movember. How to ask: Ask, Listen, Encourage action, Check in. Modelo de prática para conversas sobre saúde.",
     url: "https://www.ruok.org.au/how-to-ask",
-    achado: "Quatro passos para uma conversa que abre espaço: perguntar, ouvir, incentivar um passo e voltar a perguntar depois. Na palestra: P.O.I.S. É um modelo de prática, ainda sem ensaio controlado próprio.",
+    achado: "Quatro passos para uma conversa que abre espaço: perguntar, ouvir, incentivar um passo e voltar a perguntar depois. Na trilha: P.O.I.S. É um modelo de prática, ainda sem ensaio controlado próprio.",
   },
 
   {
@@ -369,7 +369,7 @@ export const REFERENCIAS: Referencia[] = [
     curta: "Ministério da Saúde, Vigitel 2024",
     completa: "Ministério da Saúde (2025). Vigitel Brasil 2006–2024: vigilância de fatores de risco e proteção para doenças crônicas por inquérito telefônico.",
     url: "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/svsa/vigitel/vigitel-brasil-2006-2024.pdf",
-    achado: "Nas capitais, 29,7% dos adultos referiram diagnóstico médico de hipertensão em 2024 (eram 22,6% em 2006). Excesso de peso: 62,6%. Obesidade: 25,7%.",
+    achado: "Nas capitais, 29,7% dos adultos referiram diagnóstico médico de hipertensão em 2024 (eram 22,6% em 2006). Excesso de peso: 62,6%. Obesidade: 25,7%. Entre os homens, em 2024: excesso de peso 64,9% e obesidade 24,4%; fumantes 13,9% (mulheres: 9,5%); diagnóstico médico de depressão 8,3% (mulheres: 19,7%).",
     br: true,
   },
   {
@@ -393,7 +393,7 @@ export const REFERENCIAS: Referencia[] = [
     curta: "IBGE, Tábuas de Mortalidade 2024",
     completa: "Instituto Brasileiro de Geografia e Estatística (2025). Tábuas Completas de Mortalidade para o Brasil — 2024. Rio de Janeiro: IBGE.",
     url: "https://agenciadenoticias.ibge.gov.br/pt/agencia-noticias/45275-expectativa-de-vida-chega-a-76-6-anos-em-2024.html",
-    achado: "Expectativa de vida de 76,6 anos em 2024: 73,3 para os homens e 79,9 para as mulheres — 6,6 anos de diferença, puxada sobretudo por mortes masculinas por causas externas.",
+    achado: "Expectativa de vida de 76,6 anos em 2024: 73,3 para os homens e 79,9 para as mulheres — 6,6 anos de diferença, puxada sobretudo por mortes masculinas por causas externas. Dos 20 aos 24 anos, a mortalidade masculina foi 4,1 vezes a feminina. E a diferença continua depois dos 60: quem chega a essa idade vive, em média, mais 20,8 anos se for homem e mais 24,2 se for mulher.",
     br: true,
   },
   {

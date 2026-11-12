@@ -22,6 +22,7 @@ const ATALHOS: [string, string][] = [
   ["C", "contraste máximo"],
   ["A", "parar animações"],
   ["N", "notas do palestrante"],
+  ["R", "mostrar / esconder as fontes de todos os slides"],
   ["? ou H", "abrir as configurações"],
 ];
 
@@ -71,6 +72,7 @@ export function MotorPalco({
   const [animOff, setAnimOff] = useState(false);
   const [sistemaReduz, setSistemaReduz] = useState(false);
   const [notasOn, setNotasOn] = useState(false);
+  const [fontesAbertas, setFontesAbertas] = useState(false);
   const [ajudaOn, setAjudaOn] = useState(false);
   const [escala, setEscala] = useState(1);
   const [paleta, setPaleta] = useState<Paleta>("azul");
@@ -211,6 +213,10 @@ export function MotorPalco({
         case "N":
           setNotasOn((n) => !n);
           break;
+        case "r":
+        case "R":
+          setFontesAbertas((f) => !f);
+          break;
         case "?":
         case "h":
         case "H":
@@ -279,7 +285,7 @@ export function MotorPalco({
   const anuncio = `Slide ${indice + 1} de ${SEQUENCIA.length}${atual.slide.titulo ? `: ${atual.slide.titulo}` : ""}`;
 
   return (
-    <PalcoCtx.Provider value={{ reduzido }}>
+    <PalcoCtx.Provider value={{ reduzido, fontesAbertas }}>
       <MotionConfig reducedMotion={reduzido ? "always" : "user"}>
         <div className="min-h-screen bg-bg text-ink">
           {celular && emPe && !verAssim && (
@@ -485,7 +491,7 @@ export function MotorPalco({
                   </section>
 
                   <section aria-labelledby="cfg-extra">
-                    <h3 id="cfg-extra" className="mb-2 font-bold">Movimento e notas</h3>
+                    <h3 id="cfg-extra" className="mb-2 font-bold">Movimento, notas e fontes</h3>
                     <div className="flex flex-wrap gap-2" role="group" aria-labelledby="cfg-extra">
                       <button
                         type="button"
@@ -506,6 +512,16 @@ export function MotorPalco({
                         }`}
                       >
                         Mostrar notas do palestrante
+                      </button>
+                      <button
+                        type="button"
+                        aria-pressed={fontesAbertas}
+                        onClick={() => setFontesAbertas((f) => !f)}
+                        className={`rounded-lg border-2 px-4 py-2 font-semibold ${
+                          fontesAbertas ? "border-acento bg-acento text-sobre-acento" : "border-line-2 bg-surface-2 text-ink"
+                        }`}
+                      >
+                        Mostrar todas as fontes
                       </button>
                     </div>
                   </section>

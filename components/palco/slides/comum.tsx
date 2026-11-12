@@ -1,7 +1,54 @@
 "use client";
 
 import { motion } from "motion/react";
+import {
+  Brain,
+  CalendarCheck,
+  CloudRain,
+  Eye,
+  Gauge,
+  LifeBuoy,
+  Megaphone,
+  MessageCircle,
+  TriangleAlert,
+  Users,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import { escreve, degrau } from "@/lib/motion";
+
+/** Ícones que o roteiro (blocos.ts) pode pedir pelo nome. */
+export const ICONES: Record<string, LucideIcon> = {
+  painel: Gauge,
+  cabeca: Brain,
+  boia: LifeBuoy,
+  chuva: CloudRain,
+  raio: Zap,
+  susto: TriangleAlert,
+  megafone: Megaphone,
+  conversa: MessageCircle,
+  juntos: Users,
+  olho: Eye,
+  agenda: CalendarCheck,
+};
+
+/** Ícone grande num círculo, para slides de frase: dá imagem sem somar texto. */
+export function IconeGrande({ nome }: { nome?: string }) {
+  const Icone = nome ? ICONES[nome] : undefined;
+  if (!Icone) return null;
+  return (
+    <motion.span
+      aria-hidden
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="flex shrink-0 items-center justify-center rounded-full bg-campanha-wash text-campanha shadow-[0_0_6vmin_-1vmin_var(--campanha-fill)]"
+      style={{ width: "min(26vw, 44vh)", height: "min(26vw, 44vh)" }}
+    >
+      <Icone className="h-[55%] w-[55%]" strokeWidth={1.6} />
+    </motion.span>
+  );
+}
 
 /** Rótulo em pílula + título do slide. Um padrão só para todos os tipos. */
 export function Titulo({ sobre, titulo, tamanho = "titulo" }: { sobre?: string; titulo?: string; tamanho?: "titulo" | "corpo" | "mega" }) {

@@ -14,7 +14,7 @@ export function Capa({ slide }: { slide: Slide }) {
   return (
     <div className="grid w-full grid-cols-[1fr_auto] items-center gap-[5vmin]">
       <div className="flex min-w-0 flex-col gap-[3vmin]">
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="pilula dados text-palco-nota font-semibold uppercase tracking-[0.18em] text-campanha">
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="pilula dados w-fit whitespace-nowrap text-palco-nota font-semibold uppercase tracking-[0.18em] text-campanha">
           Novembro Azul · saúde do homem
         </motion.p>
         <motion.h2 initial="entra" animate="ativo" variants={escreve} className="titulo text-[length:calc(clamp(80px,11vw,190px)*var(--escala-texto,1))] leading-[0.92] tracking-[-0.03em] text-ink">
@@ -65,13 +65,13 @@ export function Palestrante() {
   );
 }
 
-/** Pergunta de mão levantada; a segunda pergunta entra depois de alguns segundos. */
+/** Pergunta de mão levantada; a segunda pergunta entra depois de alguns segundos (ou logo, com `segundaJa`). */
 export function Pergunta({ slide }: { slide: Slide }) {
   const [segunda, setSegunda] = useState(false);
   useEffect(() => {
-    const t = setTimeout(() => setSegunda(true), 4500);
+    const t = setTimeout(() => setSegunda(true), slide.segundaJa ? 700 : 4500);
     return () => clearTimeout(t);
-  }, []);
+  }, [slide.segundaJa]);
   return (
     <div className="flex w-full flex-col gap-[5vmin]">
       <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="dados flex items-center gap-[1.4vmin] text-palco-nota font-semibold uppercase tracking-[0.16em] text-campanha">
