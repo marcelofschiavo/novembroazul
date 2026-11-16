@@ -99,6 +99,11 @@ export type KitPalco = {
   trilhaUrl: string | null;
   fontesCurtas: (ids: string[]) => string;
   ui: TextosPalco;
+  /**
+   * Logo de quem contratou, no rodapé de todos os slides. Só nas versões
+   * feitas para um cliente (ex.: /palcoprobem); o palco genérico não tem.
+   */
+  parceiro?: { nome: string; src: string; largura: number; altura: number };
 };
 
 export const UI_PT: TextosPalco = {

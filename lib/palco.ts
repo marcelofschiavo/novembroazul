@@ -2,6 +2,7 @@
 
 import { slidesEmSequencia, type SlideNaSequencia } from "@/conteudo/blocos";
 import { BLOCCHI } from "@/conteudo/it/palco";
+import { BLOCOS_PROBEM } from "@/conteudo/probem";
 
 /**
  * Navegação do palco. Puramente local — sem Supabase, sem sessão, sem
@@ -35,9 +36,13 @@ export const SEQUENCIA_CURTA: SlideNaSequencia[] = IDS_CURTA.map((id) => {
 /** Versão italiana (/palcoitaliano): rascunho da palestra completa, com dados da Itália. */
 export const SEQUENCIA_ITALIANO: SlideNaSequencia[] = BLOCCHI.flatMap((bloco) => bloco.slides.map((slide) => ({ bloco, slide })));
 
+/** Versão para a Probem (/palcoprobem): sintetizada, com o logo do cliente no rodapé. */
+export const SEQUENCIA_PROBEM: SlideNaSequencia[] = BLOCOS_PROBEM.flatMap((bloco) => bloco.slides.map((slide) => ({ bloco, slide })));
+
 export const CHAVE_POSICAO = "na26:palco:posicao";
 export const CHAVE_POSICAO_ITALIANO = "na26:palcoitaliano:posicao";
 export const CHAVE_POSICAO_CURTA = "na26:palcocurto:posicao";
+export const CHAVE_POSICAO_PROBEM = "na26:palcoprobem:posicao";
 
 export function indiceDoSlide(seq: SlideNaSequencia[], slideId: string | null): number {
   if (!slideId) return 0;

@@ -469,6 +469,22 @@ export const REFERENCIAS: Referencia[] = [
     br: true,
   },
   {
+    id: "nilson2020",
+    curta: "Nilson et al., Rev Panam Salud Publica 2020",
+    completa: "Nilson, E. A. F., Andrade, R. C. S., Brito, D. A., & Oliveira, M. L. (2020). Custos atribuíveis a obesidade, hipertensão e diabetes no Sistema Único de Saúde, Brasil, 2018. Revista Panamericana de Salud Pública, 44, e32.",
+    doi: "10.26633/RPSP.2020.32",
+    achado: "Em 2018, hipertensão, diabetes e obesidade custaram ao SUS R$ 3,45 bilhões em internações, procedimentos e remédios — 72% desse gasto com pessoas de 30 a 69 anos. Cuidar cedo é o caminho mais barato.",
+    br: true,
+  },
+  {
+    id: "farmaciaPopular",
+    curta: "Ministério da Saúde, Farmácia Popular (2025)",
+    completa: "Ministério da Saúde (2025). Programa Farmácia Popular do Brasil.",
+    url: "https://www.gov.br/saude/pt-br/composicao/sectics/farmacia-popular",
+    achado: "Desde 14 de fevereiro de 2025, todos os medicamentos do Farmácia Popular são gratuitos — entre eles, os de hipertensão e diabetes.",
+    br: true,
+  },
+  {
     id: "cvv",
     curta: "CVV, cvv.org.br",
     completa: "Centro de Valorização da Vida (2025). O CVV. Atendimento pelo 188, chat e e-mail.",

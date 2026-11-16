@@ -94,6 +94,7 @@ export function Lista({ slide }: { slide: Slide }) {
           );
         })}
       </motion.ul>
+      <Destaque texto={slide.destaque} atraso={0.4 + (slide.itens?.length ?? 0) * 0.35 + 0.4} />
     </div>
   );
 }

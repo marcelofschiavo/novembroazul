@@ -7,11 +7,13 @@ import {
   CloudRain,
   Eye,
   Gauge,
+  Hourglass,
   LifeBuoy,
   Megaphone,
   MessageCircle,
   TriangleAlert,
   Users,
+  Wrench,
   Zap,
   type LucideIcon,
 } from "lucide-react";
@@ -30,6 +32,8 @@ export const ICONES: Record<string, LucideIcon> = {
   juntos: Users,
   olho: Eye,
   agenda: CalendarCheck,
+  revisao: Wrench,
+  ampulheta: Hourglass,
 };
 
 /** Ícone grande num círculo, para slides de frase: dá imagem sem somar texto. */

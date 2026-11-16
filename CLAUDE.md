@@ -4,7 +4,9 @@
 
 Palco (`/palco`) + trilha (`/trilha`) da palestra de Marcelo Schiavo sobre saúde do homem. **Genérico:
 serve a várias empresas** — nada no site leva nome ou logo de cliente (dados de cliente só nas
-propostas, em `proposta/`, fora do git). História standalone: Davi, o pai Roberto e Lia. Ver `README.md`
+propostas, em `proposta/`, fora do git). **Exceção pedida por Marcelo:** `/palcoprobem` (palco
+sintetizado para a Probem, com o logo do cliente no rodapé; fora dos buscadores e sem link na home).
+História standalone: Davi, o pai Roberto e Lia. Ver `README.md`
 e `docs/` (plano, campanha de e-mails, revisão didática).
 
 ## Regras que não se negociam
