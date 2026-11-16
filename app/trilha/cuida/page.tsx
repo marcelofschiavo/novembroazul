@@ -14,6 +14,7 @@ export default function PaginaCuida() {
       titulo="Para quem cuida dele"
       ideia="Parceira, filha, mãe, amigo, colega: muitas vezes é por alguém próximo que o homem chega ao médico. O jeito de convidar faz toda a diferença."
       porque="Quando a mensagem soa como ordem (“você PRECISA”), surge a reatância: irritação e mais resistência. Convite com um passo claro funciona melhor. E no homem, o sinal que aparece em casa costuma ser irritação, não tristeza."
+      leve="Convide, não cobre. Ofereça ir junto. E cuide de você também."
       fontes={["rains2013", "ruok", "martin2013", "gomes2007"]}
     >
       <section>

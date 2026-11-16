@@ -91,8 +91,9 @@ export default function PaginaTrilha() {
           <AnelProgresso fracao={fracao} tamanho={76} />
         </div>
         <p className="mt-4 max-w-prose text-lg text-ink-2">
-          Sete passos curtos para sair do “depois eu vejo” para a consulta marcada. Sem cadastro: o que você
-          preenche fica só neste aparelho — nada vai para a empresa.
+          Seis passos curtos, um depois do outro: primeiro a sua vida e os medos que fazem adiar, depois o corpo,
+          e no fim o seu compromisso. Cada passo termina com o botão do próximo. Sem cadastro: o que você preenche
+          fica só neste aparelho — nada vai para a empresa.
         </p>
         {proximo && (
           <Link href={proximo.href} className="mt-6 inline-flex items-center gap-2 rounded-full bg-acento px-6 py-3 font-bold text-sobre-acento shadow-sm transition hover:brightness-110">
@@ -103,7 +104,7 @@ export default function PaginaTrilha() {
 
       <section className="mt-10">
         <h2 className="mb-1 text-2xl font-bold text-ink">O essencial</h2>
-        <p className="mb-5 text-base text-muted">Na ordem, cerca de 25 minutos no total. Os {MODULOS_TRILHA.length} liberam o certificado.</p>
+        <p className="mb-5 text-base text-muted">Na ordem, cerca de {MODULOS_ESSENCIAIS.reduce((t, m) => t + m.minutos, 0)} minutos no total. Os {MODULOS_TRILHA.length} liberam o certificado.</p>
         <ListaModulos modulos={MODULOS_ESSENCIAIS} concluidos={concluidos} numerar />
       </section>
 
@@ -115,7 +116,7 @@ export default function PaginaTrilha() {
 
       <section className="mt-12">
         <h2 className="mb-1 text-2xl font-bold text-ink">Pra ir além</h2>
-        <p className="mb-5 text-base text-muted">Para quem cuida de um homem, para a cabeça, para o sono — e as fontes de tudo.</p>
+        <p className="mb-5 text-base text-muted">Para quem cuida de um homem, para o sono, a próstata em detalhe — e as fontes de tudo.</p>
         <ListaModulos modulos={MODULOS_EXTRAS} concluidos={concluidos} grade />
       </section>
 

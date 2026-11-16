@@ -34,9 +34,11 @@ export default function PaginaSono() {
   return (
     <PaginaModulo
       id="sono"
-      titulo="Sono, ronco e turno"
+      titulo="Sono e ronco"
       ideia="Sono é combustível. Adulto precisa de 7 horas ou mais — e ronco com pausas não é “normal de homem”: é luz do painel."
       porque="Dormir menos de 7 horas de forma habitual está associado a pressão alta, diabetes, doença do coração, depressão e mais acidentes. No Brasil, 1 em cada 5 adultos das capitais dorme menos de 6 horas (Vigitel 2025). Em São Paulo, um estudo com polissonografia encontrou apneia em quase 1 em cada 3 adultos, e os homens têm cerca de 4 vezes mais chance."
+      historia="O ronco do Davi era apneia — e a irritação dele piorava com o sono ruim. Tratar o sono ajudou a cabeça também."
+      leve="Ronco com pausas não é “normal de homem”: é luz do painel. E apneia tem tratamento."
       fontes={["watson2015", "vigitel2025sono", "tufik2010", "chung2016", "nagappa2015", "lloydjones2022"]}
     >
       <section>
@@ -95,11 +97,6 @@ export default function PaginaSono() {
         </ul>
       </section>
 
-      <section className="mt-8">
-        <Resultado tom="neutro" titulo="Na história">
-          O ronco do Davi era apneia — e a irritação dele piorava com o sono ruim. Tratar o sono ajudou a cabeça também.
-        </Resultado>
-      </section>
     </PaginaModulo>
   );
 }

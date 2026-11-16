@@ -19,7 +19,8 @@ export default function PaginaQuiz() {
     setMelhor(q.melhor);
   }, []);
 
-  const respondidas = Object.keys(respostas).length;
+  // Conta só as perguntas atuais: respostas de perguntas antigas (o quiz mudou) ficam de fora.
+  const respondidas = QUIZ.filter((q) => respostas[q.id] !== undefined).length;
   const acertos = QUIZ.filter((q) => respostas[q.id] === q.certa).length;
   const terminou = respondidas === QUIZ.length;
 
@@ -27,7 +28,7 @@ export default function PaginaQuiz() {
     if (respostas[id] !== undefined) return;
     const novas = { ...respostas, [id]: i };
     const novosAcertos = QUIZ.filter((q) => novas[q.id] === q.certa).length;
-    const novoMelhor = Object.keys(novas).length === QUIZ.length ? Math.max(melhor, novosAcertos) : melhor;
+    const novoMelhor = QUIZ.every((q) => novas[q.id] !== undefined) ? Math.max(melhor, novosAcertos) : melhor;
     setRespostas(novas);
     setMelhor(novoMelhor);
     gravarQuiz({ respostas: novas, melhor: novoMelhor });
@@ -36,8 +37,9 @@ export default function PaginaQuiz() {
   return (
     <PaginaModulo
       id="quiz"
-      titulo="Quiz final"
-      ideia="Dez perguntas sobre o que passou na palestra e na trilha. Não é prova: cada resposta vem com a explicação e a fonte."
+      titulo="Para fixar"
+      ideia="Dez perguntas rápidas sobre o que passou na palestra e na trilha. Não é prova: cada resposta vem com a explicação."
+      leve="Revisão em dia, medo com resposta, silêncio com porta aberta — e um compromisso com data."
       porque="Tentar lembrar fixa mais do que reler — é o efeito do teste, um dos achados mais sólidos da psicologia da aprendizagem."
       fontes={["roediger2006"]}
       concluido={terminou}

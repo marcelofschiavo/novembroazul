@@ -3,24 +3,33 @@
 import { useEffect, useState } from "react";
 import { CalendarPlus, FileDown } from "lucide-react";
 import { PaginaModulo, Resultado } from "@/components/trilha/PaginaModulo";
-import { lerPlano, gravarPlano, lerNumeros, hojeISO, type PlanoEuVou } from "@/lib/local";
+import { lerPlano, gravarPlano, lerNumeros, lerSilencio, hojeISO, type PlanoEuVou } from "@/lib/local";
 import { baixarLembrete } from "@/lib/ics";
 import { gerarCartao } from "@/lib/pdf-docs/cartao";
 
 const SUGESTOES_SE = ["segunda, depois do almoço", "o dia do meu pagamento", "a semana do meu aniversário", "sexta, antes de sair do trabalho"];
 const SUGESTOES_ENTAO = ["ligo e marco a consulta", "marco pelo aplicativo do plano", "vou à UBS perto de casa", "chamo meu pai para ir junto"];
+const SUGESTOES_QUEM = ["pelos meus filhos", "pela minha companheira", "pelo meu pai", "por mim, aos 70"];
+/** O jeito de quebrar o silêncio escolhido no passo 3, para lembrar aqui. */
+const JEITO: Record<string, string> = {
+  verdade: "trocar o “tô bem” por uma frase verdadeira",
+  duasvezes: "perguntar duas vezes a um amigo se está tudo bem mesmo",
+  time: "mandar mensagem para o seu time da conversa difícil",
+};
 const MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
 export default function PaginaPlano() {
   const [p, setP] = useState<PlanoEuVou>({ se: "", entao: "", data: "", marco: "", carta: "" });
   const [salvo, setSalvo] = useState(false);
   const [gerando, setGerando] = useState(false);
+  const [silencio, setSilencio] = useState("");
 
   useEffect(() => {
     const x = lerPlano();
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setP(x);
     setSalvo(!!(x.se && x.entao));
+    setSilencio(lerSilencio().escolha);
   }, []);
 
   const pronto = p.se.trim() && p.entao.trim();
@@ -33,16 +42,23 @@ export default function PaginaPlano() {
   return (
     <PaginaModulo
       id="plano"
-      titulo="Meu plano “Eu vou”"
-      ideia="“Vou ver isso” não vira agenda. Uma frase com quando e o quê, sim. Monte a sua, ponha no celular e leve o cartão de bolso."
-      porque="Em 94 estudos, planos do tipo “se for tal momento, então eu faço tal coisa” aumentaram de forma média a grande a chance de cumprir o que se planejou. Datas-marco, como o aniversário, dão um empurrão extra (efeito “recomeço”). Um detalhe importante: planos prontos, impressos num folheto, não funcionaram num ensaio de rastreamento — o plano precisa ser seu, com o seu quando e o seu onde. E pensar no seu “eu” do futuro ajuda, mas o efeito dura pouco: por isso a carta vem colada ao plano."
+      titulo="Meu compromisso"
+      ideia="“Vou ver isso” não vira agenda. Um compromisso com um porquê, uma frase e uma data, sim. Monte o seu, ponha no celular e leve o cartão de bolso."
+      historia="Davi não marcou por ele. Marcou pelo pai: “Pai, marquei pra nós dois. Eu vou junto.” E acabou cuidando de si também."
+      leve="Um compromisso pequeno, com data, vale mais que uma promessa grande."
+      porque="Planos do tipo “se for tal momento, então eu faço tal coisa” aumentam bastante a chance de cumprir o que se planejou (94 estudos). O plano precisa ser seu, com o seu quando e o seu onde: frases prontas num folheto não funcionaram. Datas-marco, como o aniversário, dão um empurrão a mais. E lembrar por quem você faz isso dá sentido ao passo — o que ajuda a sair do lugar."
       fontes={["gollwitzer2006", "lo2014", "dai2014", "rutchick2018", "pnaish2009"]}
       concluido={salvo}
     >
       <section className="cartao p-5">
-        <h2 className="text-xl font-bold text-ink">1. Um minuto com o seu “eu” de 70 anos (opcional)</h2>
-        <p className="mt-1 text-ink-2">Onde você quer estar aos 70? Com quem? Fazendo o quê? O que esse homem pediria pra você fazer esta semana?</p>
-        <textarea value={p.carta} onChange={(e) => setP({ ...p, carta: e.target.value })} onBlur={() => salvar()} rows={3} maxLength={400} className="campo mt-3" placeholder="Escreva pra ele — ou dele pra você." />
+        <h2 className="text-xl font-bold text-ink">1. Por quem você vai?</h2>
+        <p className="mt-1 text-ink-2">Você não adoece sozinho: em casa, no trabalho e entre os amigos, tem gente que conta com você. Cuidar de você também é cuidar deles.</p>
+        <textarea value={p.carta} onChange={(e) => setP({ ...p, carta: e.target.value })} onBlur={() => salvar()} rows={2} maxLength={400} className="campo mt-3" placeholder="Ex.: pela minha filha, pelo meu pai, por mim aos 70." />
+        <div className="mt-2 flex flex-wrap gap-2">
+          {SUGESTOES_QUEM.map((s) => (
+            <button key={s} onClick={() => setP({ ...p, carta: s })} className="rounded-full border border-line-2 px-3 py-1 text-sm text-ink-2 hover:border-acento">{s}</button>
+          ))}
+        </div>
       </section>
 
       <section className="mt-6 cartao p-5">
@@ -90,6 +106,14 @@ export default function PaginaPlano() {
           </label>
         </div>
       </section>
+
+      {silencio && JEITO[silencio] && (
+        <div className="mt-6">
+          <Resultado tom="neutro" titulo="E o que você escolheu no passo 3">
+            Esta semana: {JEITO[silencio]}. O compromisso não é só com o médico — é também com a conversa.
+          </Resultado>
+        </div>
+      )}
 
       <div className="mt-6 flex flex-col gap-3">
         <button

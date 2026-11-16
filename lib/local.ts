@@ -107,6 +107,16 @@ export function gravarAdiamento(a: Adiamento): void {
   escrever("adio", a);
 }
 
+/* ---------------- o silêncio dos homens ---------------- */
+
+/** O jeito de quebrar o silêncio que a pessoa escolheu para a semana. */
+export function lerSilencio(): { escolha: string } {
+  return ler("silencio", { escolha: "" });
+}
+export function gravarSilencio(escolha: string): void {
+  escrever("silencio", { escolha });
+}
+
 /* ---------------- plano "Eu vou" ---------------- */
 
 export type PlanoEuVou = { se: string; entao: string; data: string; marco: string; carta: string };

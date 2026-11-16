@@ -40,7 +40,9 @@ export default function PaginaRoda() {
     <PaginaModulo
       id="roda"
       titulo="Minha Roda da Saúde"
-      ideia="Dê uma nota de 0 a 10 para cada área da sua vida, do jeito que está hoje. Embaixo de cada barra, uma frase mostra o que aquela nota costuma querer dizer. Não é a nota mais baixa que importa: é a roda girar torta."
+      ideia="Saúde não é só exame: é corpo, cabeça e as pessoas em volta. Dê uma nota de 0 a 10 para cada área, do jeito que está hoje — embaixo de cada barra, uma frase ajuda a escolher."
+      historia="Davi tinha o carro em dia e a própria roda torta: sono ruim, cabeça cheia, amigos sumindo. Quase nunca é uma área só."
+      leve="Não é a nota mais baixa que importa: é a roda girar torta. Escolha uma área — só uma — para este mês."
       porque="Saúde é corpo, cabeça e as pessoas em volta ao mesmo tempo (modelo biopsicossocial). A Roda é uma ferramenta de reflexão — não é teste, não dá diagnóstico: dá direção. Escolher uma área só deixa o próximo passo pequeno e possível."
       fontes={["engel1977", "modesto2018"]}
       concluido={!!estado.atual}

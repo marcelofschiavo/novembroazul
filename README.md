@@ -13,10 +13,10 @@ Produção: `trilhanovembroazul.vercel.app` · repo `github.com/marcelofschiavo/
 - **`/campanha`** — kit para o RH: 9 e-mails prontos para colar (formatado ou texto puro), mensagens
   curtas, cards para intranet, cartaz A4 (PDF e PNG) e cartões de bolso (A4, frente e verso). Genérico,
   com campos [DATA], [HORÁRIO] e [LOCAL OU LINK] para o RH preencher. Não aparece em buscadores.
-- **`/trilha`** — 7 passos essenciais (Roda da Saúde, Meus números, Decidir junto: o PSA, Luzes do
-  painel, Por que eu adio, Meu plano "Eu vou", Quiz) + extras (Para quem cuida dele, Cabeça, Sono e
-  turno, Reveja a palestra, Referências). Certificado, cartão de bolso em PDF e lembrete `.ics`,
-  tudo gerado no navegador.
+- **`/trilha`** — 6 passos essenciais em linha reta (Minha Roda da Saúde, Os medos que fazem adiar, O
+  silêncio dos homens, O meu painel, Meu compromisso, Para fixar), cada um terminando no botão do próximo,
+  + extras (Para quem cuida dele, Sono e ronco, Próstata e PSA em detalhe, Reveja a palestra, Referências).
+  Certificado, cartão de bolso em PDF e lembrete `.ics`, tudo gerado no navegador.
 
 ## Fio da palestra
 
