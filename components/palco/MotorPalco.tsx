@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MotionConfig, motion } from "motion/react";
-import { Settings } from "lucide-react";
+import { Settings, Maximize, Minimize } from "lucide-react";
 import { slide as slideVariant, semMovimento } from "@/lib/motion";
 import { SEQUENCIA_PALCO, CHAVE_POSICAO, lerPosicaoSalva, salvarPosicao, indiceDoSlide } from "@/lib/palco";
 import type { SlideNaSequencia } from "@/conteudo/blocos";
@@ -82,6 +82,17 @@ export function MotorPalco({
   const [fonte, setFonte] = useState<Fonte>("padrao");
   const fecharRef = useRef<HTMLButtonElement>(null);
   const toqueRef = useRef<{ x: number; y: number } | null>(null);
+  // Tela cheia por botão: no DeX e em projeção sem teclado não há como apertar F.
+  const [podeCheia, setPodeCheia] = useState(false);
+  const [cheia, setCheia] = useState(false);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPodeCheia(!!document.fullscreenEnabled);
+    const aoMudar = () => setCheia(!!document.fullscreenElement);
+    aoMudar();
+    document.addEventListener("fullscreenchange", aoMudar);
+    return () => document.removeEventListener("fullscreenchange", aoMudar);
+  }, []);
 
   useEffect(() => {
     // ?s=<id do slide> abre direto num slide (ensaio, conferência de tela).
@@ -366,6 +377,20 @@ export function MotorPalco({
               <button type="button" aria-label="Slide anterior" onClick={() => irPara(indice - 1, -1)} disabled={indice === 0} className="flex h-28 w-28 items-center justify-center rounded-full border-2 border-line-2 bg-surface/80 text-6xl font-bold text-ink-2 backdrop-blur disabled:opacity-30">‹</button>
               <button type="button" aria-label="Próximo slide" onClick={() => irPara(indice + 1, 1)} disabled={indice === SEQUENCIA.length - 1} className="flex h-28 w-28 items-center justify-center rounded-full bg-acento text-6xl font-bold text-sobre-acento disabled:opacity-30">›</button>
             </div>
+          )}
+
+          {podeCheia && (
+            <button
+              type="button"
+              onClick={() => {
+                if (document.fullscreenElement) document.exitFullscreen();
+                else document.documentElement.requestFullscreen().catch(() => {});
+              }}
+              aria-label={cheia ? "Sair da tela cheia (F)" : "Tela cheia (F)"}
+              className="fixed right-[4.25rem] top-3 flex h-12 w-12 items-center justify-center rounded-full border-2 border-line-2 bg-surface text-ink-2 opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100"
+            >
+              {cheia ? <Minimize aria-hidden className="h-6 w-6" strokeWidth={2.2} /> : <Maximize aria-hidden className="h-6 w-6" strokeWidth={2.2} />}
+            </button>
           )}
 
           <button
