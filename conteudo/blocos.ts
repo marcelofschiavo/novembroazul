@@ -45,7 +45,8 @@ export type TipoSlide =
   | "psaToque"
   | "luzesNivel"
   | "couraca"
-  | "quemConta";
+  | "quemConta"
+  | "prostata";
 
 export type Fala = { quem: IdPersonagem; texto: string };
 
@@ -297,6 +298,25 @@ export const BLOCOS: Bloco[] = [
         destaque: "Luz acesa não é sentença: quase sempre é tratável.",
         fonteIds: ["tufik2010", "martin2013"],
         notaApresentador: "Como no carro: vermelha, pare agora; laranja, vá logo; amarela, marque. Dor no peito também é aperto, peso ou queimação; falta de ar fora do comum também conta. Lembra do Roberto levantando à noite? Na maioria das vezes é aumento benigno da próstata — mas é luz do painel. Jato fraco também conta. Ronco com pausas e sono que não descansa: apneia é comum em homens (estudo de São Paulo). Irritação, tristeza ou álcool a mais por 2 semanas ou mais: pode ser a depressão disfarçada, que vem no próximo bloco. Dificuldade de ereção também é luz amarela: sinal dos vasos, conte ao médico. Se alguém tiver pensamento de desistir da vida, é luz vermelha: CVV 188 ou atendimento já.",
+      },
+      {
+        id: "4.8b",
+        tipo: "prostata",
+        sobre: "Luz amarela",
+        titulo: "Levantar à noite: a próstata que cresce",
+        colunas: [
+          { titulo: "Normal", itens: ["Canal livre"] },
+          { titulo: "Aumentada", itens: ["Canal apertado, jato fraco"] },
+        ],
+        itens: [
+          "Com a idade, a próstata cresce e aperta o canal da urina",
+          "É o problema de próstata mais comum depois dos 50 — e não é câncer",
+          "Tem tratamento: conte ao médico",
+        ],
+        destaque: "Quase sempre é benigno. Quem confirma é a consulta.",
+        fonteIds: ["berry1984", "niddkHpb"],
+        notaApresentador:
+          "Pincelada, 1 minuto. É o que o Roberto tinha. Com a idade a próstata cresce e aperta o canal da urina: jato fraco, demora para começar, sensação de não esvaziar, levantar à noite. Em autópsias, aparece em cerca de metade dos homens de 51 a 60 anos e na grande maioria depois dos 80 — nem todos têm sintoma. Não é câncer. Mas os sintomas podem se parecer com os de outros problemas, e é por isso que vale contar ao médico: só ele diferencia. Tem tratamento, de remédio a cirurgia. Ponte para o próximo bloco: se é tão comum e tratável, por que a gente não vai? Medo.",
       },
     ],
   },

@@ -292,3 +292,78 @@ export function QuemConta({ slide }: { slide: Slide }) {
     </div>
   );
 }
+
+/**
+ * Desenho esquemático (próprio) da próstata: bexiga, canal da urina e os dois
+ * lobos. Aumentada, os lobos crescem e o canal estreita; o jato embaixo fica
+ * fino e falhado. Cores só pelas variáveis do tema; o rótulo em texto vem
+ * embaixo, então a cor nunca é o único sinal.
+ */
+function DesenhoProstata({ aumentada }: { aumentada?: boolean }) {
+  const bexiga = "M30 70 C30 18 170 18 170 70 C170 118 140 148 100 150 C60 148 30 118 30 70 Z";
+  const id = aumentada ? "bexiga-a" : "bexiga-n";
+  const lobo = aumentada ? { dx: 30, rx: 30, ry: 34, cy: 192 } : { dx: 20, rx: 12, ry: 20, cy: 182 };
+  const canal = aumentada
+    ? "M92 146 L92 158 C92 174 98.5 180 98.5 192 C98.5 204 92 210 92 226 L92 238 L108 238 L108 226 C108 210 101.5 204 101.5 192 C101.5 180 108 174 108 158 L108 146 Z"
+    : "M92 146 L108 146 L108 238 L92 238 Z";
+  return (
+    <svg viewBox="0 0 200 280" className="h-full w-full" aria-hidden>
+      <defs>
+        <clipPath id={id}>
+          <path d={bexiga} />
+        </clipPath>
+      </defs>
+      <path d={bexiga} fill="var(--surface)" stroke="var(--muted)" strokeWidth="5" />
+      <rect x="0" y="82" width="200" height="80" fill="var(--atencao-wash)" clipPath={`url(#${id})`} />
+      <line x1="34" y1="82" x2="166" y2="82" stroke="var(--atencao)" strokeWidth="3" clipPath={`url(#${id})`} />
+      {[-1, 1].map((lado) => (
+        <ellipse key={lado} cx={100 + lado * lobo.dx} cy={lobo.cy} rx={lobo.rx} ry={lobo.ry} fill="var(--alerta-wash)" stroke="var(--alerta)" strokeWidth="4" />
+      ))}
+      <path d={canal} fill="var(--atencao-wash)" stroke="var(--atencao)" strokeWidth="3" />
+      {aumentada ? (
+        <line x1="100" y1="244" x2="100" y2="274" stroke="var(--atencao)" strokeWidth="3" strokeDasharray="4 7" strokeLinecap="round" />
+      ) : (
+        <line x1="100" y1="244" x2="100" y2="274" stroke="var(--atencao)" strokeWidth="8" strokeLinecap="round" />
+      )}
+    </svg>
+  );
+}
+
+/** Aumento benigno da próstata (HPB): o desenho normal × aumentada e três frases. */
+export function Prostata({ slide }: { slide: Slide }) {
+  const lados = slide.colunas ?? [];
+  return (
+    <div className="flex w-full flex-col gap-[2.2vmin]">
+      <Titulo sobre={slide.sobre} titulo={slide.titulo} />
+      <div className="grid grid-cols-[1.05fr_1fr] items-center gap-[4vmin]">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          role="img"
+          aria-label={lados.map((l) => `${l.titulo}: ${l.itens.join(", ")}`).join(". ")}
+          className="cartao grid grid-cols-2 gap-[2vmin] rounded-[2.4vmin] p-[1.8vmin]"
+        >
+          {lados.map((l, i) => (
+            <div key={l.titulo} className="flex flex-col items-center gap-[1vmin] text-center">
+              <div style={{ height: "min(27vh, 17vw)", aspectRatio: "200 / 280" }}>
+                <DesenhoProstata aumentada={i === 1} />
+              </div>
+              <span className={`titulo text-palco-corpo leading-tight ${i === 1 ? "text-ink" : "text-ink-2"}`}>{l.titulo}</span>
+              <span className="text-palco-nota font-semibold leading-tight text-ink-2">{l.itens[0]}</span>
+            </div>
+          ))}
+        </motion.div>
+        <motion.ul initial="entra" animate="ativo" variants={escada(0.8, 0.5)} className="flex flex-col gap-[2vmin]">
+          {slide.itens?.map((it) => (
+            <motion.li key={it} variants={degrau} className="flex items-baseline gap-[1.4vmin] text-palco-texto font-semibold leading-snug text-ink">
+              <span aria-hidden className="text-campanha">▸</span>
+              {it}
+            </motion.li>
+          ))}
+        </motion.ul>
+      </div>
+      <Destaque texto={slide.destaque} atraso={2.4} />
+    </div>
+  );
+}

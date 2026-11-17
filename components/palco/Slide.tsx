@@ -8,7 +8,7 @@ import { Numeros } from "./slides/Numeros";
 import { Historia } from "./slides/Historia";
 import { Painel } from "./slides/Painel";
 import { RodaSlide, CartaMito, Quilometragem } from "./slides/Revisao";
-import { PsaToque, LuzesNivel, Couraca, QuemConta } from "./slides/Novos";
+import { PsaToque, LuzesNivel, Couraca, QuemConta, Prostata } from "./slides/Novos";
 import { Frase, DuasColunas, Lista, Passos, Pensamentos, Reescrita, Caminhos, Exercicio, SeEntao, OndeIr, Fecho, Perguntas } from "./slides/Conversa";
 
 function Miolo({ slide }: { slide: TipoSlide }) {
@@ -67,6 +67,8 @@ function Miolo({ slide }: { slide: TipoSlide }) {
       return <Couraca slide={slide} />;
     case "quemConta":
       return <QuemConta slide={slide} />;
+    case "prostata":
+      return <Prostata slide={slide} />;
     default:
       return null;
   }

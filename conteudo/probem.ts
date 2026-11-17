@@ -96,6 +96,7 @@ export const BLOCOS_PROBEM: Bloco[] = [
         notaApresentador:
           "Como no carro: vermelha, pare agora; laranja, vá logo; amarela, marque. Lembra do Roberto levantando à noite? É luz amarela — na maioria das vezes, coisa benigna. Irritação ou tristeza por 2 semanas também é luz do painel: é o próximo assunto. Pensamento de desistir da vida é luz vermelha: CVV 188 ou atendimento já.",
       }),
+      de("4.8b"),
     ],
   },
   {

@@ -477,6 +477,20 @@ export const REFERENCIAS: Referencia[] = [
     br: true,
   },
   {
+    id: "berry1984",
+    curta: "Berry et al., Journal of Urology (1984)",
+    completa: "Berry, S. J., Coffey, D. S., Walsh, P. C., & Ewing, L. L. (1984). The development of human benign prostatic hyperplasia with age. The Journal of Urology, 132(3), 474–479.",
+    doi: "10.1016/S0022-5347(17)49698-4",
+    achado: "Em autópsias, o crescimento benigno da próstata aparece em cerca de metade dos homens de 51 a 60 anos e na grande maioria depois dos 80 — muitos sem sintoma nenhum.",
+  },
+  {
+    id: "niddkHpb",
+    curta: "NIDDK/NIH, Próstata aumentada (2024)",
+    completa: "National Institute of Diabetes and Digestive and Kidney Diseases (2024). Enlarged Prostate (Benign Prostatic Hyperplasia).",
+    url: "https://www.niddk.nih.gov/health-information/urologic-diseases/prostate-problems/enlarged-prostate-benign-prostatic-hyperplasia",
+    achado: "A hiperplasia prostática benigna é o problema de próstata mais comum depois dos 50. A próstata cresce, mas o crescimento não é câncer; ela aperta a uretra e pode causar jato fraco, urgência e levantar à noite. Como esses sintomas podem ter outras causas, vale contar ao médico.",
+  },
+  {
     id: "farmaciaPopular",
     curta: "Ministério da Saúde, Farmácia Popular (2025)",
     completa: "Ministério da Saúde (2025). Programa Farmácia Popular do Brasil.",
