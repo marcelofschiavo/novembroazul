@@ -308,6 +308,15 @@ export function MotorPalco({
           <main
             lang={kit.lingua === "it" ? "it" : undefined}
             className="palco-grade"
+            onClick={(e) => {
+              // Clique no slide passa (como no PowerPoint): serve ao touchpad do
+              // DeX e a quem projeta sem teclado. Quarto esquerdo da tela volta.
+              // Botões, links e campos do slide continuam com a função deles.
+              if ((e.target as HTMLElement).closest("button, a, input, textarea, select, summary, label, [role='button']")) return;
+              if (window.getSelection()?.toString()) return;
+              if (e.clientX < window.innerWidth * 0.25) irPara(indice - 1, -1);
+              else irPara(indice + 1, 1);
+            }}
             onTouchStart={(e) => {
               toqueRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
             }}
